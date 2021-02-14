@@ -1,0 +1,12 @@
+{
+  "name": "PriceComparison-frontend",
+  "displayName": "PriceComparison-frontend",
+  "expo": {
+    "name": "PriceComparison-frontend",
+    "slug": "PriceComparison-frontend",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
