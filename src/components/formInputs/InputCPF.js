@@ -1,10 +1,16 @@
 import React from 'react';
-import {Validations} from '../../lib';
+import {Filters, Masks, Validations} from '../../lib';
 import Input from './Input';
 
 class InputCPF extends React.Component {
   render() {
-    return <Input {...this.props} validation={Validations.isCPF} />;
+    return <Input 
+    {...this.props} 
+    mask={Masks.inputMaskCPF}
+    maskToSubmit={Filters.clearStringOnlyNumbers}
+    validation={Validations.isCPF} 
+    maxLength={18}
+     />;
   }
 }
 

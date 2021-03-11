@@ -5,14 +5,9 @@ import {Creators} from '../reduxSagas';
 
 class LoginContainer extends Component {
 
-
-    login(username, password) {
-        const { loginRequest } = this.props;
-        loginRequest(username, password);
-    }
-
     render() {
-        return <LoginPresentation login={this.login}/>
+      const {loginRequest} = this.props;
+        return <LoginPresentation login={loginRequest}/>
     }    
     
 }
@@ -27,7 +22,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     const {loginRequest} = Creators;
     return {
-      loginRequest: function (username, password) {
+      loginRequest: function ({username, password}) {
         return dispatch(loginRequest(username, password));
       }
     };

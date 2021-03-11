@@ -8,7 +8,7 @@ import {Metrics, pagesConfig} from '../config';
 import DrawerContent from './DrawerContent';
 import * as Pages from '../pages';
 import {StyleSheet} from 'react-native';
-// import {Creators as LoginCreators} from '../features/login/reduxSagas';
+import {Creators as LoginCreators} from '../features/login/reduxSagas';
 import {LocalStorage} from '../lib';
 
 function returnStackConfig(pages = []) {
@@ -93,7 +93,7 @@ class AppNavigator extends React.PureComponent {
             ? returnStackConfig(pagesConfig.landing)
             : null}
           {/* {this.props.isLoggedIn ? returnStackConfig(pagesConfig.home) : null} */}
-          {this.props.isLoggedIn ? returnDrawerConfig(pagesConfig.home) : null}
+          {this.props.isLoggedIn ? returnDrawerConfig(pagesConfig.logged) : null}
         </NavigationContainer>
       </>
     );
@@ -103,22 +103,15 @@ class AppNavigator extends React.PureComponent {
 function mapStateToProps({global, login}) {
   return {
     isLoggedIn: global.isLoggedIn,
-    // isFetching: login.isFetching,
+    isFetching: login.isFetching,
     isFetching: false,
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   const {loginRequest} = LoginCreators;
-//   return {
-//     loginRequest: (credentials) => dispatch(loginRequest(credentials)),
-//   };
-// }
-
 function mapDispatchToProps(dispatch) {
-  // const {loginRequest} = LoginCreators;
+  const {loginRequest} = LoginCreators;
   return {
-    // loginRequest: (credentials) => dispatch(loginRequest(credentials)),
+    loginRequest: (credentials) => dispatch(loginRequest(credentials.username, credentials.password)),
   };
 }
 

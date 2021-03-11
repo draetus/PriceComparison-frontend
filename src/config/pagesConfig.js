@@ -2,9 +2,12 @@ export default {
   landing: [
     {
       name: 'Login',
-    },
+    }
+  ],
+
+  logged: [
     {
-      name: 'Home',
+      name: 'Home'
     }
   ],
 
@@ -18,7 +21,7 @@ export default {
       able: true,
     },
   ],
-  Home: [
+  home: [
     {
       name: 'Home',
       title: 'Home',

@@ -12,7 +12,7 @@ import {
 // inseris os sagas aqui
 const sagas = [
   ...globalSagas,
-  loginSagas,
+  ...loginSagas,
 ];
 
 // inseris os reducers aqui
