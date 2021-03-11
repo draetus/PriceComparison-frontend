@@ -93,7 +93,7 @@ class AppNavigator extends React.PureComponent {
             ? returnStackConfig(pagesConfig.landing)
             : null}
           {/* {this.props.isLoggedIn ? returnStackConfig(pagesConfig.home) : null} */}
-          {this.props.isLoggedIn ? returnDrawerConfig(pagesConfig.logged) : null}
+          {this.props.isLoggedIn ? returnDrawerConfig(pagesConfig.home) : null}
         </NavigationContainer>
       </>
     );

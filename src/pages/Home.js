@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Typography } from '../components';
+import { HomeContainer } from '../features/home';
 
 class Home extends Component {
 
     render() {
-        return <Typography>Home FORM</Typography>
+        return <>
+        <HomeContainer /> 
+        </>
     }
 }
 

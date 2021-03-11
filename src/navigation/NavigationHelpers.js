@@ -7,6 +7,8 @@ export function menuNavigation(link, params) {
 const navigation = {
   toLogin: (params) => menuNavigation('Login', params),
   toHome: (params) => menuNavigation('Home', params),
+  toRegisterProduct: (params) => menuNavigation('RegisterProduct', params),
+  toSearchProduct: (params) => menuNavigation('SearchProduct', params)
 };
 
 export default navigation;
