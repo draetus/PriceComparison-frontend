@@ -7,8 +7,6 @@ class RegisterProductPresentation extends Component {
 
     FormProduct = () => {
         const { exists } = this.props;
-        console.log("FORM PRODUCT:", this.props);
-        console.log("FORM PRODUCT:", exists);
         if (exists == null) {
             return (
             <>

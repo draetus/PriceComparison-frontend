@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SearchProductContainer } from '../features/searchProduct';
+import { SearchProductContainer } from '../features';
 
 class SearchProduct extends Component {
 

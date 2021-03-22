@@ -16,12 +16,16 @@ const {Creators, reducers, sagas} = createReducers(
       function: (state, {exists}) => ({
         ...state,
         isFetching: false,
-        exists: exists
+        exists
       })
     },
     {
       name: 'checkIfExistsFailure',
-      function: (state) => ({...state, isFetching: false}),
+      function: (state) => ({
+        ...state, 
+        isFetching: false,
+        exists: null
+      }),
     },
     {
       name: 'saveProductRequest',

@@ -54,9 +54,14 @@ const saveProduct = async (data) => {
   return await api.post("/product", data);
 }
 
+const searchProduct = async (barCode) => {
+  return await api.get("/product/" + barCode);
+}
+
 export default {
   logout,
   login,
   checkIfExists,
-  saveProduct
+  saveProduct,
+  searchProduct
 };
