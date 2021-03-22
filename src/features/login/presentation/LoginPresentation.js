@@ -14,8 +14,8 @@ class LoginPresentation extends Component {
                 login(data);
             }}
         >
-            <InputCPF name="username" />
-            <InputPassword name="password" />
+            <InputCPF name="username" defaultValue={"11411085930"}/>
+            <InputPassword name="password" defaultValue={"0xff8029"}/>
 
             <ButtonContained type="submit" loading={false} > LOGIN </ButtonContained>
         </FormHolder>

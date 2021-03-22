@@ -9,17 +9,14 @@ import {LocalStorage} from '../../../lib';
 export default function* loginRequest({username, password}) {
   // TODO login mockado
   try {
-    console.log("LOGIN REQUEST");
     const response = yield call(api.login, {username, password});
     // yield handleLoginPersis(credentials);
     yield put(Creators.loginSuccess());
     yield put(GlobalCreators.setUserInfos(response.data));
     yield put(GlobalCreators.globalLoggedIn());
-    console.log("LOGIN REQUEST SUCCESS");
   } catch (response) {
     // const errorResponse = new ResponseError(response);
     // errorResponse.alertMessage();
-    console.log("LOGIN EXCEPTION:", response);
     yield put(Creators.loginFailure());
   }
 }

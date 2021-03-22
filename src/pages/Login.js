@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoginContainer } from '../features/login';
+import { LoginContainer } from '../features';
 
 class Login extends Component {
 

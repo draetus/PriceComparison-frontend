@@ -6,7 +6,6 @@ import { Navigation } from "../../../navigation";
 class HomePresentation extends Component {
 
     render() {
-        console.log("HOME PRESENTATION:", Navigation);
         return (
         <>
         <ButtonContained> LISTA DE COMPRAS </ButtonContained>

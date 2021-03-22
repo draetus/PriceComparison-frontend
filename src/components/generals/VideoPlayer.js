@@ -15,7 +15,6 @@ class VideoPlayer extends React.Component {
     return this.state.showVideo ? (
       <Video
         {...this.props}
-        onError={(error) => console.log({error})}
         controls
         style={styles.size}
       />

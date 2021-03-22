@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Typography } from '../components';
-import { RegisterProductContainer } from '../features/registerProduct';
+import { RegisterProductContainer } from '../features';
 
 class RegisterProduct extends Component {
 
     render() {
-        return <RegisterProductContainer />
+        return (
+            // <Typography>TESTE</Typography>
+            <RegisterProductContainer />
+        )
     }
 }
 

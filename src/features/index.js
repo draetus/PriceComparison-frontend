@@ -9,22 +9,30 @@ import {
   LoginContainer
 } from './login';
 
+import {
+  productRegisterSagas,
+  productRegisterReducer,
+  RegisterProductContainer
+} from "./registerProduct";
+
 // inseris os sagas aqui
 const sagas = [
   ...globalSagas,
   ...loginSagas,
+  ...productRegisterSagas,
 ];
 
 // inseris os reducers aqui
 const reducers = {
   global: globalReducer,
   login: loginReducer,
+  registerProduct: productRegisterReducer,
 };
 
 export {
   sagas,
   reducers,
   // inserir as páginas abaixo
-  LoginContainer
-
+  LoginContainer,
+  RegisterProductContainer
 };

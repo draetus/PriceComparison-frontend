@@ -8,7 +8,6 @@ const {Creators, reducers, sagas} = createReducers(
       params: ['username', 'password'],
       function: (state) => ({...state, isFetching: true}),
       sagaFunction: loginRequest,
-      // sagaFunction: () => console.log("ENTROU NO SAGA")
     },
     {
       name: 'loginSuccess',

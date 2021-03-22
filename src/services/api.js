@@ -1,9 +1,9 @@
 import { create } from "apisauce";
 
-import { navigate, paths } from "../navigation";
+import { Navigation, paths } from "../navigation";
 
 // const baseURL = "http://localhost:8090"; // LOCAL
-const baseURL = "http://192.168.15.10:8090"; // PC LOCAL
+const baseURL = "http://192.168.15.7:8090"; // PC LOCAL
 
 let token = null;
 
@@ -46,7 +46,17 @@ const login = async (body) => {
   return await api.post("/login", body);
 };
 
+const checkIfExists = async (barCode) => {
+  return await api.get("/product/exists/" + barCode);
+}
+
+const saveProduct = async (data) => {
+  return await api.post("/product", data);
+}
+
 export default {
   logout,
-  login
+  login,
+  checkIfExists,
+  saveProduct
 };
