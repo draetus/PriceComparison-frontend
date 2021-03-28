@@ -9,6 +9,7 @@ export default function* searchProductRequest({barCode}) {
     const response = yield call(api.searchProduct, barCode);
     yield put(Creators.searchProductSuccess(response.data));
   } catch (response) {
+    console.log("FAILURE: ", response);
     yield put(Creators.searchProductFailure());
   }
 }

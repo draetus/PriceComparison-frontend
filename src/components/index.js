@@ -25,6 +25,8 @@ import PageTitleWithBack from './strings/PageTitleWithBack';
 import PrimaryTitle from './strings/PrimaryTitle';
 import SecondaryTitle from './strings/SecondaryTitle';
 import Typography from './strings/Typography';
+// camera - Componentes de camera
+import BarcodeScanner from "./camera/BarcodeScanner";
 
 export {
   // buttons - Clicáveis da aplicação
@@ -54,4 +56,6 @@ export {
   PrimaryTitle,
   SecondaryTitle,
   Typography,
+  // camera - Componentes de camera
+  BarcodeScanner,
 };

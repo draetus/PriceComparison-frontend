@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Typography } from '../../../components';
-import { SearchProductPresentation } from '../presentation';
+import { SearchProductSelectorPresentation } from '../presentation';
 import {Creators} from '../reduxSagas';
 
 class SearchProductContainer extends Component {
 
     render() {
-        const {data, searchProductRequest} = this.props;
-        console.log("SEARCH PRODUCT CONTAINER: ", this.props);
+        const {data, searchProductRequest, clearData} = this.props;
         return (
-        <SearchProductPresentation
+        <SearchProductSelectorPresentation
         searchProductRequest={searchProductRequest}
-        data={data} 
+        data={data}
+        clearData={clearData}
         /> 
         );
     }
@@ -21,7 +20,6 @@ class SearchProductContainer extends Component {
 
 function mapStateToProps(state) {
     const {isFetching, data} = state.searchProduct;
-    console.log("MAP STATE TO PROPS: ", state.searchProduct);
     return {
       isFetching,
       data
@@ -29,10 +27,13 @@ function mapStateToProps(state) {
   }
   
 function mapDispatchToProps(dispatch) {
-    const { searchProductRequest } = Creators;
+    const { searchProductRequest, clearData } = Creators;
     return {
       searchProductRequest: function ({barCode}) {
         return dispatch(searchProductRequest(barCode));
+      },
+      clearData: function() {
+        return dispatch(clearData());
       }
     };
   }

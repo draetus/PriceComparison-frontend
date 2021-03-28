@@ -26,6 +26,14 @@ const {Creators, reducers, sagas} = createReducers(
           data: null
         }),
     },
+    {
+      name: 'clearData',
+      function: (state) => ({
+          ...state, 
+          isFetching: false,
+          data: null
+        }),
+    },
   ],
   {
     isFetching: false,

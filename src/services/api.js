@@ -3,7 +3,7 @@ import { create } from "apisauce";
 import { Navigation, paths } from "../navigation";
 
 // const baseURL = "http://localhost:8090"; // LOCAL
-const baseURL = "http://192.168.15.7:8090"; // PC LOCAL
+const baseURL = "http://10.0.0.105:8090"; // PC LOCAL
 
 let token = null;
 
