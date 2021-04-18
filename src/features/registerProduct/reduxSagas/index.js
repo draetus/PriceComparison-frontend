@@ -1,35 +1,12 @@
 import createReducers from '../../../store/createPageReducer';
-import checkIfExistsRequest from './checkIfExistsRequest';
 import saveProductRequest from "./saveProductRequest";
+import savePriceProductRequest from "./savePriceProductRequest";
 
 const {Creators, reducers, sagas} = createReducers(
   [
     {
-      name: 'checkIfExistsRequest',
-      params: ['barCode'],
-      function: (state) => ({...state, isFetching: true}),
-      sagaFunction: checkIfExistsRequest,
-    },
-    {
-      name: 'checkIfExistsSuccess',
-      params: ['exists'],
-      function: (state, {exists}) => ({
-        ...state,
-        isFetching: false,
-        exists
-      })
-    },
-    {
-      name: 'checkIfExistsFailure',
-      function: (state) => ({
-        ...state, 
-        isFetching: false,
-        exists: null
-      }),
-    },
-    {
       name: 'saveProductRequest',
-      params: ['name', 'barCode'],
+      params: ['name', 'barcode'],
       function: (state) => ({...state, isFetching: true}),
       sagaFunction: saveProductRequest,
     },
@@ -44,10 +21,27 @@ const {Creators, reducers, sagas} = createReducers(
       name: 'saveProductFailure',
       function: (state) => ({...state, isFetching: false}),
     },
+    {
+      name: 'savePriceProductRequest',
+      params: ['price', 'barcode', 'latitude', 'longitude'],
+      function: (state) => ({...state, isFetchingPrice: true}),
+      sagaFunction: savePriceProductRequest,
+    },
+    {
+      name: 'savePriceProductSuccess',
+      function: (state) => ({
+        ...state,
+        isFetchingPrice: false,
+      })
+    },
+    {
+      name: 'savePriceProductFailure',
+      function: (state) => ({...state, isFetchingPrice: false}),
+    },
   ],
   {
     isFetching: false,
-    exists: null,
+    isFetchingPrice: false,
   },
 );
 

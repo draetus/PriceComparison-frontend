@@ -21,12 +21,18 @@ import {
   SearchProductContainer
 } from "./searchProduct";
 
+import {
+  customModalSagas,
+  customModalReducer
+} from '../modals';
+
 // inseris os sagas aqui
 const sagas = [
   ...globalSagas,
   ...loginSagas,
   ...productRegisterSagas,
   ...searchProductSagas,
+  ...customModalSagas,
 ];
 
 // inseris os reducers aqui
@@ -35,6 +41,7 @@ const reducers = {
   login: loginReducer,
   registerProduct: productRegisterReducer,
   searchProduct: searchProductReducer,
+  customModal: customModalReducer,
 };
 
 export {

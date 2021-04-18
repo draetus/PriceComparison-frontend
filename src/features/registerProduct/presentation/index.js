@@ -1,3 +1,4 @@
-import RegisterProductPresentation from "./RegisterProductPresentation";
+import ManualPresentation from "./ManualRegister";
+import RegisterProductSelectorPresentation from "./RegisterProductSelectorPresentation";
 
-export {RegisterProductPresentation}
+export {RegisterProductSelectorPresentation, ManualPresentation}

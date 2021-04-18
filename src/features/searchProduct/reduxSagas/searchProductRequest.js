@@ -4,12 +4,11 @@ import {Creators} from '.';
 
 import {api} from '../../../services';
 
-export default function* searchProductRequest({barCode}) {
+export default function* searchProductRequest({barcode}) {
   try {
-    const response = yield call(api.searchProduct, barCode);
+    const response = yield call(api.searchProduct, barcode);
     yield put(Creators.searchProductSuccess(response.data));
   } catch (response) {
-    console.log("FAILURE: ", response);
     yield put(Creators.searchProductFailure());
   }
 }

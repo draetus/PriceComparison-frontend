@@ -25,42 +25,25 @@ class SearchProductSelectorPresentation extends Component {
     }
 
     SearchProductManual = () => {
-        const {searchProductRequest} = this.props;
+        const {openSearchProductModalRequest} = this.props;
         return (
             <SearchProductPresentation 
-                searchProductRequest={searchProductRequest}
+                openSearchProductModalRequest={openSearchProductModalRequest}
             />
         )
     }
 
     SearchProductBarcode = () => {
-        const {searchProductRequest} = this.props;
+        const {openSearchProductModalRequest} = this.props;
         return (
             <BarcodeSearchProductPresentation 
-                searchProductRequest={searchProductRequest}
-            />
-        )
-    }
-
-    ProductData = () => {
-        const {data, clearData} = this.props;
-        return (
-            <ProductDataPresentation 
-                data={data}
-                clearData={clearData}
+                openSearchProductModalRequest={openSearchProductModalRequest}
             />
         )
     }
 
     render() {
         const {manualSearch, barcodeSearch} = this.state;
-        const {data} = this.props;
-
-        if (data) {
-            return (
-                <this.ProductData />
-            )
-        }
 
         if (manualSearch) {
             return (

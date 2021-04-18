@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { BarcodeScanner, ButtonContained, Input, Typography } from '../../../components';
-import { FormHolder } from '../../../FormConfig';
 
 class SearchProductPresentation extends Component {
 
+    onBarCodeRead = (barcode) => {
+        const { openSearchProductModalRequest } = this.props;
+        openSearchProductModalRequest({barcode});
+    }
+
     render() {
-        const {searchProductRequest} = this.props;
         return (
         <>
-            <BarcodeScanner />
+            <BarcodeScanner
+            onBarCodeRead={this.onBarCodeRead} 
+            />
         </>
         )
     }

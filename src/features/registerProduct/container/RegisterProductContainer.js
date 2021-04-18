@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { RegisterProductPresentation } from '../presentation';
+import { RegisterProductSelectorPresentation } from '../presentation';
 import {Creators} from '../reduxSagas';
+import {Creators as CustomModalCreators} from '../../../modals/reduxSagas';
 
 class RegisterProductContainer extends Component {
 
     render() {
-        const { checkIfExistsRequest, exists, saveProductRequest } = this.props;
+        const { openRegisterProductModalRequest, isFetching } = this.props;
 
 
         return (
-        <RegisterProductPresentation 
-            checkIfExistsRequest={checkIfExistsRequest}
-            exists={exists}
-            saveProductRequest={saveProductRequest}
+        <RegisterProductSelectorPresentation 
+            openRegisterProductModalRequest={openRegisterProductModalRequest}
         /> 
         )
     }
@@ -21,21 +20,17 @@ class RegisterProductContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    const {isFetching, exists} = state.registerProduct;
+    const {isFetching} = state.registerProduct;
     return {
-      isFetching,
-      exists
+      isFetching
     };
   }
   
 function mapDispatchToProps(dispatch) {
-    const { checkIfExistsRequest, saveProductRequest } = Creators;
+    const { openRegisterProductModalRequest } = CustomModalCreators;
     return {
-      checkIfExistsRequest: function ({barCode}) {
-        return dispatch(checkIfExistsRequest(barCode));
-      },
-      saveProductRequest: function ({name, barCode}) {
-        return dispatch(saveProductRequest(name, barCode))
+      openRegisterProductModalRequest: function ({barcode}) {
+        return dispatch(openRegisterProductModalRequest(barcode));
       }
     };
   }

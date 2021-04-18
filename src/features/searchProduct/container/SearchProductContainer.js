@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SearchProductSelectorPresentation } from '../presentation';
-import {Creators} from '../reduxSagas';
+import {Creators as CustomModalCreators} from '../../../modals/reduxSagas';
 
 class SearchProductContainer extends Component {
 
     render() {
-        const {data, searchProductRequest, clearData} = this.props;
+        const {openSearchProductModalRequest} = this.props;
         return (
         <SearchProductSelectorPresentation
-        searchProductRequest={searchProductRequest}
-        data={data}
-        clearData={clearData}
+        openSearchProductModalRequest={openSearchProductModalRequest}
         /> 
         );
     }
@@ -19,21 +17,17 @@ class SearchProductContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    const {isFetching, data} = state.searchProduct;
+    const {isFetching} = state.searchProduct;
     return {
-      isFetching,
-      data
+      isFetching
     };
   }
   
 function mapDispatchToProps(dispatch) {
-    const { searchProductRequest, clearData } = Creators;
+    const { openSearchProductModalRequest } = CustomModalCreators;
     return {
-      searchProductRequest: function ({barCode}) {
-        return dispatch(searchProductRequest(barCode));
-      },
-      clearData: function() {
-        return dispatch(clearData());
+      openSearchProductModalRequest: function ({barcode}) {
+        return dispatch(openSearchProductModalRequest(barcode));
       }
     };
   }

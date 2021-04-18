@@ -5,17 +5,18 @@ import { FormHolder } from '../../../FormConfig';
 class SearchProductPresentation extends Component {
 
     render() {
-        const {searchProductRequest} = this.props;
+        const {openSearchProductModalRequest} = this.props;
         return (
         <>
             <Typography>BUSCA DE PRODUTOS MANUAL</Typography>
             <FormHolder
             onSubmit={(data) => {
-                searchProductRequest(data);
+                console.log("SEARCH PRODUCT PRESENTATION MANUAL: ",  data);
+                openSearchProductModalRequest({barcode: data.barcode});
             }}
             >
 
-            <Input name="barCode" inputLabel="CÓDIGO DE BARRAS" />
+            <Input name="barcode" inputLabel="CÓDIGO DE BARRAS" />
 
             <ButtonContained type="submit"> PESQUISAR </ButtonContained>
         </FormHolder>

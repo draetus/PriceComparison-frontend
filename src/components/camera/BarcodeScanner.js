@@ -3,7 +3,6 @@ import {
     Text,
     View,
     StyleSheet,
-    Alert,
     TouchableOpacity,
     Image } from 'react-native';
 import { RNCamera } from 'react-native-camera';
@@ -18,7 +17,8 @@ export default class BarcodeScan extends Component {
     }
 
     onBarCodeRead = (e) => {
-        Alert.alert("O valor do código de barras é" + e.data, " | O tipo do código de barras é: " + e.type);
+        const {onBarCodeRead} = this.props;
+        onBarCodeRead(e.data);
     }
 
     render() {
@@ -29,7 +29,6 @@ export default class BarcodeScan extends Component {
                     torchMode={this.state.torchOn ? RNCamera.Constants.FlashMode.on : RNCamera.Constants.FlashMode.off}
                     onBarCodeRead={this.onBarCodeRead}
                     ref={cam => this.camera = cam}
-                    // aspect={RNCamera.Constants.Aspect.fill}
                 >
                     <Text style={{
                         backgroundColor: 'white'

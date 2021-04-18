@@ -5,39 +5,33 @@ const {Creators, reducers, sagas} = createReducers(
   [
     {
       name: 'searchProductRequest',
-      params: ['barCode'],
+      params: ['barcode'],
       function: (state) => ({...state, isFetching: true}),
       sagaFunction: searchProductRequest,
     },
     {
       name: 'searchProductSuccess',
-      params: ['data'],
-      function: (state, {data}) => ({
+      function: (state) => ({
         ...state,
-        isFetching: false,
-        data
+        isFetching: false
       }),
     },
     {
       name: 'searchProductFailure',
       function: (state) => ({
           ...state, 
-          isFetching: false,
-          data: null
+          isFetching: false
         }),
     },
     {
       name: 'clearData',
       function: (state) => ({
-          ...state, 
-          isFetching: false,
-          data: null
+          ...state
         }),
-    },
+    }
   ],
   {
-    isFetching: false,
-    data: null
+    isFetching: false
   },
 );
 
