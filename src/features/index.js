@@ -26,6 +26,12 @@ import {
   customModalReducer
 } from '../modals';
 
+import {
+  ShoppingListContainer,
+  shoppingListSagas,
+  shoppingListReducer
+} from "./shoppingList";
+
 // inseris os sagas aqui
 const sagas = [
   ...globalSagas,
@@ -33,6 +39,7 @@ const sagas = [
   ...productRegisterSagas,
   ...searchProductSagas,
   ...customModalSagas,
+  ...shoppingListSagas
 ];
 
 // inseris os reducers aqui
@@ -42,6 +49,7 @@ const reducers = {
   registerProduct: productRegisterReducer,
   searchProduct: searchProductReducer,
   customModal: customModalReducer,
+  shoppingList: shoppingListReducer,
 };
 
 export {
@@ -50,5 +58,6 @@ export {
   // inserir as páginas abaixo
   LoginContainer,
   RegisterProductContainer,
-  SearchProductContainer
+  SearchProductContainer,
+  ShoppingListContainer
 };

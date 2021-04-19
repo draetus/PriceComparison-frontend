@@ -3,8 +3,8 @@ import { create } from "apisauce";
 import { Navigation, paths } from "../navigation";
 
 // const baseURL = "http://localhost:8090"; // LOCAL
-// const baseURL = "http://10.0.0.105:8090"; // PC LOCAL
-const baseURL = "http://192.168.15.5:8090"; // PC LOCAL
+const baseURL = "http://10.0.0.105:8090"; // PC LOCAL
+// const baseURL = "http://192.168.15.5:8090"; // PC LOCAL
 
 let token = null;
 
@@ -67,6 +67,18 @@ const checkIfExistsProduct = async (barcode) => {
   return await api.get("/product/exists/" + barcode);
 }
 
+const searchShoppingList = async () => {
+  return await api.get("/shoppinglist");
+}
+
+const createShoppingList = async (data) => {
+  return await api.post("/shoppinglist", data);
+}
+
+const deleteShoppingList = async (id) => {
+  return await api.delete("/shoppinglist/" + id);
+}
+
 export default {
   logout,
   login,
@@ -74,5 +86,8 @@ export default {
   saveProduct,
   savePriceProduct,
   searchProduct,
-  checkIfExistsProduct
+  checkIfExistsProduct,
+  searchShoppingList,
+  createShoppingList,
+  deleteShoppingList
 };

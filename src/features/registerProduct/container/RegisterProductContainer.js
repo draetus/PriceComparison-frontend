@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RegisterProductSelectorPresentation } from '../presentation';
-import {Creators} from '../reduxSagas';
 import {Creators as CustomModalCreators} from '../../../modals/reduxSagas';
 
 class RegisterProductContainer extends Component {

@@ -22,12 +22,6 @@ const {Creators, reducers, sagas} = createReducers(
           ...state, 
           isFetching: false
         }),
-    },
-    {
-      name: 'clearData',
-      function: (state) => ({
-          ...state
-        }),
     }
   ],
   {

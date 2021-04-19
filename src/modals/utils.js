@@ -27,7 +27,6 @@ function setSearchModalRef(ref) {
   searchModalRef = ref;
 }
 function setSearchModalInfos(barcode, name) {
-  console.log("SET SEARCH MODAL INFOS: ", {barcode, name});
   searchModalRef.setInfos({barcode, name}, true);
 }
 function closeSearchModal() {

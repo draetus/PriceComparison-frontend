@@ -8,7 +8,8 @@ const navigation = {
   toLogin: (params) => menuNavigation('Login', params),
   toHome: (params) => menuNavigation('Home', params),
   toRegisterProduct: (params) => menuNavigation('RegisterProduct', params),
-  toSearchProduct: (params) => menuNavigation('SearchProduct', params)
+  toSearchProduct: (params) => menuNavigation('SearchProduct', params),
+  toShoppingList: (params) => menuNavigation('ShoppingList', params),
 };
 
 export default navigation;

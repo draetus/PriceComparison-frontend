@@ -14,6 +14,9 @@ export default {
     },
     {
       name: 'SearchProduct'
+    },
+    {
+      name: 'ShoppingList'
     }
   ],
 
@@ -52,6 +55,16 @@ export default {
       name: 'SearchProduct',
       title: 'SearchProduct',
       icon: 'SearchProduct',
+      showHeader: true,
+      showInMenu: true,
+      able: true,
+    }
+  ],
+  ShoppingList: [
+    {
+      name: 'ShoppingList',
+      title: 'ShoppingList',
+      icon: 'ShoppingList',
       showHeader: true,
       showInMenu: true,
       able: true,

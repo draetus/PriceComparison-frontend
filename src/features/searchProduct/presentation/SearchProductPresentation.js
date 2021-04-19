@@ -11,7 +11,6 @@ class SearchProductPresentation extends Component {
             <Typography>BUSCA DE PRODUTOS MANUAL</Typography>
             <FormHolder
             onSubmit={(data) => {
-                console.log("SEARCH PRODUCT PRESENTATION MANUAL: ",  data);
                 openSearchProductModalRequest({barcode: data.barcode});
             }}
             >

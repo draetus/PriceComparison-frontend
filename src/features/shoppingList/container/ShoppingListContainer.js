@@ -1,0 +1,54 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {ShoppingListPresentation} from '../presentation';
+import {Creators} from '../reduxSagas';
+
+class ShoppingListContainer extends Component {
+
+  componentDidMount() {
+    const {searchShoppingListsRequest} = this.props;
+    searchShoppingListsRequest();
+  }
+
+  render() {
+
+    const {shoppinglists, createShoppingListsRequest, deleteShoppingListsRequest} = this.props;
+
+    return (
+      <ShoppingListPresentation 
+        shoppinglists={shoppinglists}
+        createShoppingListsRequest={createShoppingListsRequest}
+        deleteShoppingListsRequest={deleteShoppingListsRequest}
+      />
+    )
+  }
+
+
+}
+
+
+function mapStateToProps(state) {
+    const {isFetchingShoppingList, isFetchingCreateShoppingList, isFetchingDeleteShoppingList, shoppinglists} = state.shoppingList;
+    console.log("MAP STATE TO PROPS: ", state.shoppingList);
+    return {
+      isFetching : isFetchingShoppingList || isFetchingCreateShoppingList || isFetchingDeleteShoppingList,
+      shoppinglists
+    };
+  }
+  
+function mapDispatchToProps(dispatch) {
+    const { searchShoppingListsRequest, createShoppingListsRequest, deleteShoppingListsRequest } = Creators;
+    return {
+      searchShoppingListsRequest: function () {
+        return dispatch(searchShoppingListsRequest())
+      },
+      createShoppingListsRequest: function ({name}) {
+        return dispatch(createShoppingListsRequest(name))
+      },
+      deleteShoppingListsRequest: function ({id}) {
+        return dispatch(deleteShoppingListsRequest(id))
+      }
+    };
+  }
+  
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingListContainer);

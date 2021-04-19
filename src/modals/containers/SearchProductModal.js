@@ -37,8 +37,6 @@ class SearchProductManual extends React.Component {
   render() {
     const {barcode, name} = this.state.infos;
 
-    console.log("SEARCH PRODUCT MODAL: ", this.state.infos);
-
     const {isFetching} = this.props;
     return (
       isFetching ? 
