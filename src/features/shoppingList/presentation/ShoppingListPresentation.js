@@ -4,11 +4,13 @@ import { ButtonContained, Typography } from '../../../components';
 class ShoppingListPresentation extends Component {
 
     ShoppingList = () => {
-        const {shoppinglists = []} = this.props;
-        console.log("SHOPPING LIST PRESENTATION: ", this.props);
+        const {shoppinglists = [], deleteShoppingListsRequest} = this.props;
         return (
             shoppinglists.map((item, index) => (
-                <Typography> {item.name} </Typography>
+                <ButtonContained onPress={() => {
+                    deleteShoppingListsRequest({id: item.id})
+                }}
+                key = {item.id}> {item.name} </ButtonContained>
             ))
         )
     }

@@ -29,7 +29,6 @@ class ShoppingListContainer extends Component {
 
 function mapStateToProps(state) {
     const {isFetchingShoppingList, isFetchingCreateShoppingList, isFetchingDeleteShoppingList, shoppinglists} = state.shoppingList;
-    console.log("MAP STATE TO PROPS: ", state.shoppingList);
     return {
       isFetching : isFetchingShoppingList || isFetchingCreateShoppingList || isFetchingDeleteShoppingList,
       shoppinglists
