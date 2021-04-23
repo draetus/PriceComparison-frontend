@@ -12,7 +12,7 @@ import {
 import {AppNavigator} from './src/navigation';
 import {Theme} from './src/config';
 import configureStore from './src/store';
-import {Modal, ModalError, RegisterProductModal, SearchProductModal} from './src/modals/containers';
+import {Modal, ModalError, RegisterProductModal, SearchProductModal, RegisterShoppingListModal} from './src/modals/containers';
 import Moment from 'moment';
 import 'moment/locale/pt-br';
 Moment.updateLocale('pt-br');
@@ -73,6 +73,7 @@ class App extends React.PureComponent {
               />
               <SearchProductModal />
               <RegisterProductModal />
+              <RegisterShoppingListModal />
               <Modal />
               <ModalError />
             </PaperProvider>

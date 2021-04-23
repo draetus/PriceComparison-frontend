@@ -2,6 +2,7 @@
 let customModalRef = null;
 let registerModalRef = null;
 let searchModalRef = null;
+let registerShoppingListModalRef = null;
 
 function setCustomModalRef(ref) {
   customModalRef = ref;
@@ -33,6 +34,16 @@ function closeSearchModal() {
   searchModalRef.closeModal();
 }
 
+function setRegisterShoppingListModalRef(ref) {
+  registerShoppingListModalRef = ref;
+}
+function setRegisterShoppingListModalInfos() {
+  registerShoppingListModalRef.setInfos(null, true);
+}
+function closeRegisterShoppingListModal() {
+  registerShoppingListModalRef.closeModal();
+}
+
 const customModal = {
   setRef: setCustomModalRef,
   setInfos: setCustomModalInfos,
@@ -49,6 +60,12 @@ const searchModal = {
   setRef: setSearchModalRef,
   setInfos: setSearchModalInfos,
   close: closeSearchModal,
+}
+
+const registerShoppingListModal = {
+  setRef: setRegisterShoppingListModalRef,
+  setInfos: setRegisterShoppingListModalInfos,
+  close: closeRegisterShoppingListModal,
 }
 
 // Configuração de modais de erro - Modais de erro padrão;
@@ -68,4 +85,4 @@ const errorModal = {
   close: closeErrorModal,
 };
 
-export {customModal, registerModal, searchModal, errorModal};
+export {customModal, registerModal, searchModal, registerShoppingListModal, errorModal};

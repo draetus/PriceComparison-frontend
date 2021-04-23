@@ -17,7 +17,6 @@ class ShoppingListContainer extends Component {
     return (
       <ShoppingListPresentation 
         shoppinglists={shoppinglists}
-        createShoppingListsRequest={createShoppingListsRequest}
         deleteShoppingListsRequest={deleteShoppingListsRequest}
       />
     )
@@ -40,9 +39,6 @@ function mapDispatchToProps(dispatch) {
     return {
       searchShoppingListsRequest: function () {
         return dispatch(searchShoppingListsRequest())
-      },
-      createShoppingListsRequest: function ({name}) {
-        return dispatch(createShoppingListsRequest(name))
       },
       deleteShoppingListsRequest: function ({id}) {
         return dispatch(deleteShoppingListsRequest(id))

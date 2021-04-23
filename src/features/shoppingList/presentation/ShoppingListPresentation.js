@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ButtonContained, Typography } from '../../../components';
+import {registerShoppingListModal} from '../../../modals/utils';
 
 class ShoppingListPresentation extends Component {
 
@@ -16,8 +17,6 @@ class ShoppingListPresentation extends Component {
     }
 
     render() {
-        const {createShoppingListsRequest, deleteShoppingListsRequest} = this.props;
-
         return (
         <>
             <Typography> MINHAS LISTAS DE COMPRAS </Typography>
@@ -25,7 +24,7 @@ class ShoppingListPresentation extends Component {
             <this.ShoppingList />
 
             <ButtonContained onPress={() => {
-                createShoppingListsRequest({name: "TESTE"})
+                registerShoppingListModal.setInfos();
             }}> CRIAR NOVA LISTA </ButtonContained>
         </>
         )
