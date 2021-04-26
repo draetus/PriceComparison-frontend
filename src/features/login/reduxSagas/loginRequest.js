@@ -4,11 +4,11 @@ import {Creators} from '.';
 import {Creators as GlobalCreators} from '../../globalReduxSagas';
 
 import {api} from '../../../services';
-import {LocalStorage} from '../../../lib';
 
 export default function* loginRequest({username, password}) {
   // TODO login mockado
   try {
+    console.log("LOGIN CREATORS: ", Creators);
     const response = yield call(api.login, {username, password});
     yield put(Creators.loginSuccess());
     yield put(GlobalCreators.setUserInfos(response.data));

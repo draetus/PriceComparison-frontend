@@ -14,6 +14,10 @@ class SearchProductSelectorPresentation extends Component {
         }
     }
 
+    clear() {
+        this.setState({manualRegister: false, barcodeRegister: false});
+    }
+
     Selector = () => {
         return (
             <>
@@ -28,6 +32,7 @@ class SearchProductSelectorPresentation extends Component {
         return (
             <ManualRegister 
                 openRegisterProductModalRequest={openRegisterProductModalRequest}
+                clear = {() => this.clear()}
             />
         )
     }
@@ -37,6 +42,7 @@ class SearchProductSelectorPresentation extends Component {
         return (
             <BarcodeRegister 
                 openRegisterProductModalRequest={openRegisterProductModalRequest}
+                clear = {() => this.clear()}
             />
         )
     }

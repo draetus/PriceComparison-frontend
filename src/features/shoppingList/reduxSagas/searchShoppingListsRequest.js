@@ -6,6 +6,7 @@ import {api} from '../../../services';
 
 export default function* searchShoppingListsRequest() {
   try {
+    console.log("SHOPPING LIST CREATORS: ", Creators);
     const response = yield call(api.searchShoppingList);
     yield put(Creators.searchShoppingListsSuccess(response.data));
   } catch (response) {

@@ -2,6 +2,9 @@ import createReducers from '../../../store/createPageReducer';
 import searchShoppingListsRequest from './searchShoppingListsRequest';
 import createShoppingListsRequest from './createShoppingListsRequest';
 import deleteShoppingListsRequest from './deleteShoppingListsRequest';
+import searchShoppingListProductsRequest from "./searchShoppingListProductsRequest";
+import addProductToShoppingListRequest from './addProductToShoppingListRequest';
+import deleteProductFromShoppingListRequest from './deleteProductFromShoppingListRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -66,13 +69,80 @@ const {Creators, reducers, sagas} = createReducers(
           ...state, 
           isFetchingDeleteShoppingList: false
         }),
-    }
+    },
+    {
+      name: 'searchShoppingListProductsRequest',
+      params: ['id'],
+      function: (state) => ({...state, isFetchingShoppingListProducts: true}),
+      sagaFunction: searchShoppingListProductsRequest,
+    },
+    {
+      name: 'searchShoppingListProductsSuccess',
+      params: ['shoppingListProducts'],
+      function: (state, {shoppingListProducts}) => ({
+        ...state,
+        isFetchingShoppingListProducts: false,
+        shoppingListProducts: shoppingListProducts
+      }),
+    },
+    {
+      name: 'searchShoppingListProductsFailure',
+      function: (state) => ({
+          ...state, 
+          isFetchingShoppingListProducts: false,
+          shoppingListProducts: []
+        }),
+    },
+    {
+      name: 'addProductToShoppingListRequest',
+      params: ['id', 'barcode'],
+      function: (state) => ({...state, isFetchingAddProductToShoppingList: true}),
+      sagaFunction: addProductToShoppingListRequest,
+    },
+    {
+      name: 'addProductToShoppingListSuccess',
+      function: (state) => ({
+        ...state,
+        isFetchingAddProductToShoppingList: false,
+      }),
+    },
+    {
+      name: 'addProductToShoppingListFailure',
+      function: (state) => ({
+          ...state, 
+          isFetchingAddProductToShoppingList: false
+        }),
+    },
+    {
+      name: 'deleteProductFromShoppingListRequest',
+      params: ['id', 'barcode'],
+      function: (state) => ({...state, isFetchingDeleteProductShoppingList: true}),
+      sagaFunction: deleteProductFromShoppingListRequest,
+    },
+    {
+      name: 'deleteProductFromShoppingListSuccess',
+      function: (state) => ({
+        ...state,
+        isFetchingDeleteProductShoppingList: false
+      }),
+    },
+    {
+      name: 'deleteProductFromShoppingListFailure',
+      function: (state) => ({
+          ...state, 
+          isFetchingDeleteProductShoppingList: false
+        }),
+    },
   ],
   {
     isFetchingShoppingList: false,
     isFetchingCreateShoppingList: false,
     isFetchingDeleteShoppingList: false,
-    shoppinglists: []
+    isFetchingShoppingListProducts: false,
+    isFetchingAddProductToShoppingList: false,
+    isFetchingDeleteProductShoppingList: false,
+    shoppinglists: [],
+    shoppingListProducts: []
   },
 );
 

@@ -79,6 +79,19 @@ const deleteShoppingList = async (id) => {
   return await api.delete("/shoppinglist/" + id);
 }
 
+const searchShoppingListProducts = async (id) => {
+  console.log("SEARCH SHOPPING LIST PRODUCTS: ", "/shoppinglist/" + id + "/products");
+  return await api.get("/shoppinglist/" + id + "/products");
+}
+
+const addProductToShoppingList = async (id, data) => {
+  return await api.post("/shoppinglist/" + id + "/product", data);
+}
+
+const deleteProductFromShoppingList = async (id, barcode) => {
+  return await api.delete("/shoppinglist/" + id + "/product/" + barcode);
+}
+
 export default {
   logout,
   login,
@@ -89,5 +102,8 @@ export default {
   checkIfExistsProduct,
   searchShoppingList,
   createShoppingList,
-  deleteShoppingList
+  deleteShoppingList,
+  searchShoppingListProducts,
+  addProductToShoppingList,
+  deleteProductFromShoppingList
 };

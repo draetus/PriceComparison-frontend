@@ -17,6 +17,12 @@ export default {
     },
     {
       name: 'ShoppingList'
+    },
+    {
+      name: 'ShoppingListDetails'
+    },
+    {
+      name: 'ShoppingCart'
     }
   ],
 
@@ -65,6 +71,26 @@ export default {
       name: 'ShoppingList',
       title: 'ShoppingList',
       icon: 'ShoppingList',
+      showHeader: true,
+      showInMenu: true,
+      able: true,
+    }
+  ],
+  ShoppingListDetails: [
+    {
+      name: 'ShoppingListDetails',
+      title: 'ShoppingListDetails',
+      icon: 'ShoppingListDetails',
+      showHeader: true,
+      showInMenu: true,
+      able: true,
+    }
+  ],
+  ShoppingCart: [
+    {
+      name: 'ShoppingCart',
+      title: 'ShoppingCart',
+      icon: 'ShoppingCart',
       showHeader: true,
       showInMenu: true,
       able: true,

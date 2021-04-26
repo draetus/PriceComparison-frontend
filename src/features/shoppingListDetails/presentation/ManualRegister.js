@@ -7,11 +7,11 @@ class ManualRegister extends Component {
     render() {
         return (
         <>
-        <Typography> REGISTRO DE PRODUTOS </Typography>
+        <Typography> ADICIONAR A LISTA DE COMPRAS </Typography>
         <FormHolder
             onSubmit={(data) => {
-                const { openRegisterProductModalRequest, clear } = this.props;
-                openRegisterProductModalRequest({barcode: data.barcode});
+                const { openAddProductToShoppingListModalRequest, id, clear } = this.props;
+                openAddProductToShoppingListModalRequest({barcode: data.barcode, id: id});
                 clear();
             }}
         >

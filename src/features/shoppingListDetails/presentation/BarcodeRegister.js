@@ -4,8 +4,8 @@ import { BarcodeScanner } from '../../../components';
 class BarcodeRegister extends Component {
 
     onBarCodeRead = (barcode) => {
-        const { openRegisterProductModalRequest, clear } = this.props;
-        openRegisterProductModalRequest({barcode});
+        const { openAddProductToShoppingListModalRequest, id, clear } = this.props;
+        openAddProductToShoppingListModalRequest({barcode, id});
         clear();
     }
 

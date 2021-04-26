@@ -10,6 +10,8 @@ const navigation = {
   toRegisterProduct: (params) => menuNavigation('RegisterProduct', params),
   toSearchProduct: (params) => menuNavigation('SearchProduct', params),
   toShoppingList: (params) => menuNavigation('ShoppingList', params),
+  toShoppingListDetails: (params) => menuNavigation('ShoppingListDetails', params),
+  toShoppingCart: () => menuNavigation('ShoppingCart', params),
 };
 
 export default navigation;

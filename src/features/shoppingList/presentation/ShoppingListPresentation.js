@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { ButtonContained, Typography } from '../../../components';
 import {registerShoppingListModal} from '../../../modals/utils';
+import {Navigation} from "../../../navigation"
 
 class ShoppingListPresentation extends Component {
 
     ShoppingList = () => {
-        const {shoppinglists = [], deleteShoppingListsRequest} = this.props;
+        const {shoppinglists = [], searchShoppingListProductsRequest} = this.props;
         return (
             shoppinglists.map((item, index) => (
                 <ButtonContained onPress={() => {
-                    deleteShoppingListsRequest({id: item.id})
+                    searchShoppingListProductsRequest({id: item.id})
+                    Navigation.toShoppingListDetails(item);
                 }}
                 key = {item.id}> {item.name} </ButtonContained>
             ))

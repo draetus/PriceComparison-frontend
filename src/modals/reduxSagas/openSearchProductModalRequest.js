@@ -9,6 +9,7 @@ import { searchModal } from '../../modals/utils';
 
 export default function* openSearchProductModalRequest({barcode}) {
   try {
+    console.log("CUSTOM MODAL CREATORS: ", Creators);
     const response = yield call(api.searchProduct, barcode);
 
     searchModal.setInfos(response.data.barcode, response.data.name);

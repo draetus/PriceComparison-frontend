@@ -6,8 +6,8 @@ import {api} from '../../../services';
 
 export default function* deleteShoppingListsRequest({id}) {
   try {
-    const response = yield call(api.deleteShoppingList, id);
-    console.log("DELETE SHOPPING LSIT REQUEST: ", response);
+    console.log("SHOPPING LIST CREATORS: ", Creators);
+    yield call(api.deleteShoppingList, id);
     yield put(Creators.searchShoppingListsRequest());
     yield put(Creators.deleteShoppingListsSuccess());
   } catch (response) {

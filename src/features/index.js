@@ -32,6 +32,14 @@ import {
   shoppingListReducer
 } from "./shoppingList";
 
+import {
+  ShoppingListDetailsContainer
+} from "./shoppingListDetails";
+
+import {
+  ShoppingCartContainer
+} from "./shoppingCart";
+
 // inseris os sagas aqui
 const sagas = [
   ...globalSagas,
@@ -59,5 +67,7 @@ export {
   LoginContainer,
   RegisterProductContainer,
   SearchProductContainer,
-  ShoppingListContainer
+  ShoppingListContainer,
+  ShoppingListDetailsContainer,
+  ShoppingCartContainer
 };

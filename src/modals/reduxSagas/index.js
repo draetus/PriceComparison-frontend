@@ -1,6 +1,7 @@
 import createReducers from '../../store/createPageReducer';
 import openRegisterProductModalRequest from './openRegisterProductModalRequest';
 import openSearchProductModalRequest from './openSearchProductModalRequest';
+import openAddProductToShoppingListModalRequest from './openAddProductToShoppingListModalRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -43,11 +44,32 @@ const {Creators, reducers, sagas} = createReducers(
         ...state, 
         isFetchingSearchModal: false
       }),
+    },
+    {
+      name: 'openAddProductToShoppingListModalRequest',
+      params: ['id', 'barcode'],
+      function: (state) => ({...state, isFetchingAddProductToShoppingListModal: true}),
+      sagaFunction: openAddProductToShoppingListModalRequest,
+    },
+    {
+      name: 'openAddProductToShoppingListModalSuccess',
+      function: (state) => ({
+        ...state,
+        isFetchingAddProductToShoppingListModal: false,
+      })
+    },
+    {
+      name: 'openAddProductToShoppingListModalFailure',
+      function: (state) => ({
+        ...state, 
+        isFetchingAddProductToShoppingListModal: false
+      }),
     }
   ],
   {
     isFetchingRegisterModal: false,
-    isFetchingSearchModal: false
+    isFetchingSearchModal: false,
+    isFetchingAddProductToShoppingListModal: false
   },
 );
 

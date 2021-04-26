@@ -4,13 +4,13 @@ import {Creators} from '.';
 
 import {api} from '../../../services';
 
-export default function* addProductToShoppingListRequest({name}) {
+export default function* addProductToShoppingListRequest({id, barcode}) {
   try {
     console.log("SHOPPING LIST CREATORS: ", Creators);
-    yield call(api.createShoppingList, {name: name});
-    yield put(Creators.searchShoppingListsRequest());
+    yield call(api.addProductToShoppingList, id, {barcode: barcode});
+    yield put(Creators.searchShoppingListProductsRequest(id));
     yield put(Creators.addProductToShoppingListSuccess());
   } catch (response) {
-    yield put(Creators.createShoppingListsFailure());
+    yield put(Creators.addProductToShoppingListFailure());
   }
 }

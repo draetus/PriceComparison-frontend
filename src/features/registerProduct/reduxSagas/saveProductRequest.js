@@ -6,6 +6,7 @@ import {api} from '../../../services';
 
 export default function* saveProductRequest({name, barcode}) {
   try {
+    console.log("REGISTER PRODUCT CREATORS: ", Creators);
     yield call(api.saveProduct, {name, barcode});
     yield put(Creators.saveProductSuccess());
   } catch (response) {
