@@ -10,10 +10,12 @@ export default function* loginRequest({username, password}) {
   try {
     console.log("LOGIN CREATORS: ", Creators);
     const response = yield call(api.login, {username, password});
+    console.log("LOGIN SUCCESS: ", response);
     yield put(Creators.loginSuccess());
     yield put(GlobalCreators.setUserInfos(response.data));
     yield put(GlobalCreators.globalLoggedIn());
   } catch (response) {
+    console.log("LOGIN FAILURE: ", response);
     yield put(Creators.loginFailure());
   }
 }

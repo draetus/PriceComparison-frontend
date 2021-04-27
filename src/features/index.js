@@ -40,6 +40,10 @@ import {
   ShoppingCartContainer
 } from "./shoppingCart";
 
+import {
+  ShoppingCartInProgressContainer
+} from "./shoppingCartInProgress";
+
 // inseris os sagas aqui
 const sagas = [
   ...globalSagas,
@@ -69,5 +73,6 @@ export {
   SearchProductContainer,
   ShoppingListContainer,
   ShoppingListDetailsContainer,
-  ShoppingCartContainer
+  ShoppingCartContainer,
+  ShoppingCartInProgressContainer
 };

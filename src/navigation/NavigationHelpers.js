@@ -11,7 +11,8 @@ const navigation = {
   toSearchProduct: (params) => menuNavigation('SearchProduct', params),
   toShoppingList: (params) => menuNavigation('ShoppingList', params),
   toShoppingListDetails: (params) => menuNavigation('ShoppingListDetails', params),
-  toShoppingCart: () => menuNavigation('ShoppingCart', params),
+  toShoppingCart: (params) => menuNavigation('ShoppingCart', params),
+  toShoppingCartInProgress: (params) => menuNavigation('ShoppingCartInProgress', params),
 };
 
 export default navigation;

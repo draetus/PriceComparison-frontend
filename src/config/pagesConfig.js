@@ -23,6 +23,9 @@ export default {
     },
     {
       name: 'ShoppingCart'
+    },
+    {
+      name: 'ShoppingCartInProgress'
     }
   ],
 
@@ -91,6 +94,16 @@ export default {
       name: 'ShoppingCart',
       title: 'ShoppingCart',
       icon: 'ShoppingCart',
+      showHeader: true,
+      showInMenu: true,
+      able: true,
+    }
+  ],
+  ShoppingCartInProgress: [
+    {
+      name: 'ShoppingCartInProgress',
+      title: 'ShoppingCartInProgress',
+      icon: 'ShoppingCartInProgress',
       showHeader: true,
       showInMenu: true,
       able: true,

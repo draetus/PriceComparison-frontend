@@ -12,9 +12,11 @@ export default function* openSearchProductModalRequest({barcode}) {
     console.log("CUSTOM MODAL CREATORS: ", Creators);
     const response = yield call(api.searchProduct, barcode);
 
+    console.log("CUSTOM MODAL SUCCESS: ", response);
     searchModal.setInfos(response.data.barcode, response.data.name);
     yield put(Creators.openSearchProductModalSuccess());
   } catch (response) {
+    console.log("CUSTOM MODAL FAILURE: ", response);
     yield put(Creators.openSearchProductModalFailure());
   }
 }

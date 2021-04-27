@@ -1,3 +1,3 @@
-import ShoppingCartContainer from "./container";
+import {ShoppingCartContainer} from "./container";
 
 export {ShoppingCartContainer}

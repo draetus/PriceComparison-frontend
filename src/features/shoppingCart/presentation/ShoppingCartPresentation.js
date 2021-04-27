@@ -1,16 +1,43 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Typography } from '../../../components';
+import { ButtonContained, Typography } from '../../../components';
+import {Navigation} from "../../../navigation"
 
 class ShoppingCartPresentation extends Component {
+
+  ShoppingLists = () => {
+    const { shoppinglists = [] } = this.props;
+
+    console.log("SHOPPING CART PRESENTATION: ", shoppinglists);
+
+    return (
+      <>
+      {shoppinglists.map((item, index) => (
+        <ButtonContained 
+        key = {item.id}
+        onPress={() => {
+          Navigation.toShoppingCartInProgress(item);
+        }}
+        > {item.name} </ButtonContained>
+      ))}
+      </>
+    )
+  }
 
   render() {
 
     return (
-      <Typography>TESTE SHOPPING CART</Typography>
+      <>
+        <Typography>SELECIONE UMA LISTA DE COMPRAS</Typography>
+        <this.ShoppingLists />
+        <ButtonContained 
+        onPress={() => {
+          Navigation.toShoppingCartInProgress(null);
+        }}
+        > SEGUIR SEM LISTA </ButtonContained>
+      </>
     )
   }
 
 }
   
-export default (ShoppingCartPresentation);
+export default ShoppingCartPresentation;

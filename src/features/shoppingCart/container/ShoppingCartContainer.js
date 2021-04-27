@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Typography } from '../../../components';
+import {ShoppingCartPresentation} from '../presentation';
+import {Creators as ShoppingListCreators} from '../../shoppingList/reduxSagas';
 
 class ShoppingCartContainer extends Component {
 
+  componentDidMount() {
+    const { searchShoppingListsRequest } = this.props;
+    searchShoppingListsRequest();
+  }
+
   render() {
 
+    const { shoppinglists } = this.props;
+
     return (
-      <Typography>TESTE SHOPPING CART</Typography>
+      <ShoppingCartPresentation 
+      shoppinglists={shoppinglists}
+      />
     )
   }
 
@@ -15,13 +25,22 @@ class ShoppingCartContainer extends Component {
 
 
 function mapStateToProps(state) {
+  const {
+    isFetchingShoppingList, 
+    shoppinglists
+  } = state.shoppingList;
     return {
-
+      isFetching: isFetchingShoppingList,
+      shoppinglists
     };
   }
   
 function mapDispatchToProps(dispatch) {
+  const { searchShoppingListsRequest } = ShoppingListCreators;
     return {
+      searchShoppingListsRequest: function () {
+        return dispatch(searchShoppingListsRequest())
+      },
     };
   }
   
