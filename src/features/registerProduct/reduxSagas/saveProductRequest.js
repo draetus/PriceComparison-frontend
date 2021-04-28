@@ -6,12 +6,10 @@ import {api} from '../../../services';
 
 export default function* saveProductRequest({name, barcode}) {
   try {
-    console.log("REGISTER PRODUCT CREATORS: ", Creators);
+    console.log("SAGA MESSAGE");
     yield call(api.saveProduct, {name, barcode});
-    console.log("REGISTER PRODUCT SUCCESS: ");
     yield put(Creators.saveProductSuccess());
   } catch (response) {
-    console.log("REGISTER PRODUCT FAILURE: ", response);
     yield put(Creators.saveProductFailure());
   }
 }

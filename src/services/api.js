@@ -80,7 +80,6 @@ const deleteShoppingList = async (id) => {
 }
 
 const searchShoppingListProducts = async (id) => {
-  console.log("SEARCH SHOPPING LIST PRODUCTS: ", "/shoppinglist/" + id + "/products");
   return await api.get("/shoppinglist/" + id + "/products");
 }
 

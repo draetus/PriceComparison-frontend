@@ -7,8 +7,6 @@ class ShoppingCartPresentation extends Component {
   ShoppingLists = () => {
     const { shoppinglists = [] } = this.props;
 
-    console.log("SHOPPING CART PRESENTATION: ", shoppinglists);
-
     return (
       <>
       {shoppinglists.map((item, index) => (

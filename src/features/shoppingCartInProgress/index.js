@@ -1,3 +1,7 @@
+import {
+    sagas as shoppingCartSagas,
+    reducers as shoppingCartReducer,
+} from './reduxSagas';
 import {ShoppingCartInProgressContainer} from './container';
 
-export {ShoppingCartInProgressContainer}
+export {ShoppingCartInProgressContainer, shoppingCartSagas, shoppingCartReducer}

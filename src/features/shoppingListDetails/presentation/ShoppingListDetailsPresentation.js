@@ -56,8 +56,6 @@ Selector = () => {
   ProductList = () => {
     const {id, shoppingListProducts = [], deleteProductFromShoppingListRequest} = this.props;
 
-    console.log("SHOPPING LIST PRODUCTS: ", this.props);
-
         return (
           shoppingListProducts.map((item, index) => (
                 <ButtonContained onPress={() => {

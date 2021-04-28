@@ -1,45 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Typography } from '../../../components';
 import {Creators as ShoppingListCreators} from '../../shoppingList/reduxSagas';
+import {ShoppingCartInProgressPresentation} from '../presentation';
+import { Typography } from '../../../components';
 
 class ShoppingCartInProgressContainer extends Component {
 
+  componentDidMount() {
+    const { id, searchShoppingListProductsRequest } = this.props;
+    searchShoppingListProductsRequest({id});
+  }
+
   render() {
 
-    const { id, name } = this.props;
+    const { id, name, shoppingListProducts } = this.props;
 
     return (
-      <>
-      <Typography>TESTE SHOPPING CART IN PROGRESS</Typography>
-      <Typography>{id}</Typography>
-      <Typography>{name}</Typography>
-      </>
+      <ShoppingCartInProgressPresentation
+      id={id}
+      name={name}
+      shoppingListProducts={shoppingListProducts}
+      />
     )
+    // return (<Typography>TESTE</Typography>)
   }
 
 }
 
 
-// function mapStateToProps(state) {
-//   const {
-//     isFetchingShoppingList, 
-//     shoppinglists
-//   } = state.shoppingList;
-//     return {
-//       isFetching: isFetchingShoppingList,
-//       shoppinglists
-//     };
-//   }
+function mapStateToProps(state) {
+  const {shoppingListProducts, isFetchingShoppingListProducts} = state.shoppingList;
+  return {
+    isFetching: isFetchingShoppingListProducts,
+    shoppingListProducts
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+const { searchShoppingListProductsRequest } = ShoppingListCreators;
+  return {
+    searchShoppingListProductsRequest: function({id}) {
+      return dispatch(searchShoppingListProductsRequest(id));
+    },
+  };
+}
   
-// function mapDispatchToProps(dispatch) {
-//   const { searchShoppingListsRequest } = ShoppingListCreators;
-//     return {
-//       searchShoppingListsRequest: function () {
-//         return dispatch(searchShoppingListsRequest())
-//       },
-//     };
-//   }
-  
-// export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartInProgressContainer);
-export default (ShoppingCartInProgressContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartInProgressContainer);

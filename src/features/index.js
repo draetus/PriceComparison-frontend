@@ -41,7 +41,9 @@ import {
 } from "./shoppingCart";
 
 import {
-  ShoppingCartInProgressContainer
+  ShoppingCartInProgressContainer,
+  shoppingCartSagas,
+  shoppingCartReducer
 } from "./shoppingCartInProgress";
 
 // inseris os sagas aqui
@@ -51,7 +53,8 @@ const sagas = [
   ...productRegisterSagas,
   ...searchProductSagas,
   ...customModalSagas,
-  ...shoppingListSagas
+  ...shoppingListSagas,
+  ...shoppingCartSagas
 ];
 
 // inseris os reducers aqui
@@ -62,6 +65,7 @@ const reducers = {
   searchProduct: searchProductReducer,
   customModal: customModalReducer,
   shoppingList: shoppingListReducer,
+  shoppingCart: shoppingCartReducer
 };
 
 export {
