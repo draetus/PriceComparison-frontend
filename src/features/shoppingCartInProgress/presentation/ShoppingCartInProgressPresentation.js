@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Typography } from '../../../components';
+import { ButtonContained, Typography } from '../../../components';
 
 class ShoppingCartInProgressPresentation extends Component {
 
@@ -14,14 +14,32 @@ class ShoppingCartInProgressPresentation extends Component {
                          {item.name} 
                     </Typography>
                 ))}
-                <Typography>CARRINHO DE COMPRAS</Typography>
                 </>
             )
         }
 
+    ShoppingCartList = () => {
+        const {products = []} = this.props;
+
+        return (
+            <>
+            <Typography>CARRINHO DE COMPRAS</Typography>
+            {
+                products.map((item, index) => {
+                    <Typography key = {item.barcode}>
+                        {item.name}
+                    </Typography>
+                })
+            }
+            </>
+        )
+
+
+    }
+
     render() {
 
-        const { id, name } = this.props;
+        const { id, name, clearShoppingCart } = this.props;
 
         return (
         <>
@@ -29,6 +47,9 @@ class ShoppingCartInProgressPresentation extends Component {
         <Typography>{id}</Typography>
         <Typography>{name}</Typography>
         <this.ProductList />
+        <this.ShoppingCartList />
+        <ButtonContained>BUSCA MANUAL</ButtonContained>
+        <ButtonContained>BUSCA POR LEITOR DE CODIGO DE BARRAS</ButtonContained>
         </>
         )
     }

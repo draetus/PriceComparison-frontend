@@ -6,7 +6,7 @@ import {api} from '../../../services';
 
 export default function* deleteShoppingListsRequest({id}) {
   try {
-    console.log("SAGA MESSAGE");
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     yield call(api.deleteShoppingList, id);
     yield put(Creators.searchShoppingListsRequest());
     yield put(Creators.deleteShoppingListsSuccess());

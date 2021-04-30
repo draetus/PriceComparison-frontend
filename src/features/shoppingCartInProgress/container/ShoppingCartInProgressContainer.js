@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Creators as ShoppingListCreators} from '../../shoppingList/reduxSagas';
+import {Creators as ShoppingCartCreators} from '../reduxSagas';
 import {ShoppingCartInProgressPresentation} from '../presentation';
-import { Typography } from '../../../components';
 
 class ShoppingCartInProgressContainer extends Component {
 
@@ -13,16 +13,18 @@ class ShoppingCartInProgressContainer extends Component {
 
   render() {
 
-    const { id, name, shoppingListProducts } = this.props;
+    const { id, name, shoppingListProducts, products, updateShoppingCart, clearShoppingCart } = this.props;
 
     return (
       <ShoppingCartInProgressPresentation
       id={id}
       name={name}
       shoppingListProducts={shoppingListProducts}
+      products={products}
+      updateShoppingCart={updateShoppingCart}
+      clearShoppingCart={clearShoppingCart}
       />
     )
-    // return (<Typography>TESTE</Typography>)
   }
 
 }
@@ -30,18 +32,27 @@ class ShoppingCartInProgressContainer extends Component {
 
 function mapStateToProps(state) {
   const {shoppingListProducts, isFetchingShoppingListProducts} = state.shoppingList;
+  const {products} = state.shoppingCart;
   return {
     isFetching: isFetchingShoppingListProducts,
-    shoppingListProducts
+    shoppingListProducts,
+    products
   };
 }
 
 function mapDispatchToProps(dispatch) {
 const { searchShoppingListProductsRequest } = ShoppingListCreators;
+const { updateShoppingCart, clearShoppingCart } = ShoppingCartCreators;
   return {
     searchShoppingListProductsRequest: function({id}) {
       return dispatch(searchShoppingListProductsRequest(id));
     },
+    updateShoppingCart: function({products}) {
+      return dispatch(updateShoppingCart(products));
+    },
+    clearShoppingCart: function() {
+      return dispatch(clearShoppingCart());
+    }
   };
 }
   
