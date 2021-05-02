@@ -6,7 +6,8 @@ import {Metrics} from '../../config';
 import { FormHolder } from '../../FormConfig';
 import { SecondaryTitle, ButtonContained, Input, Typography } from '../../components';
 import { connect } from 'react-redux';
-import {Creators as ShoppingCartCreators} from '../../features/shoppingCartInProgress/reduxSagas';
+import {Creators as ShoppingCartInProgressCreators} from '../../features/shoppingCartInProgress/reduxSagas';
+import {Creators as ShoppingListCreators} from '../../features/shoppingList/reduxSagas';
 import {Creators as RegisterProductCreators} from '../../features/registerProduct/reduxSagas';
 
 class AddProductToShoppingCartModal extends React.Component {
@@ -37,7 +38,91 @@ class AddProductToShoppingCartModal extends React.Component {
     this.setState({open: false});
   };
 
-  AddProductToShoppingListForm = () => {
+  AddProductToShoppingCartForm = () => {
+    const {updateShoppingCart, addProductToShoppingListRequest} = this.props;
+    const {barcode, productName, shoppingListId, shoppingCartProducts = [], shoppingListProducts = []} = this.state.infos;
+    let existsInShoppingListProducts = false;
+    let existsInShoppingCartProducts = false;
+
+    for (i=0; i<shoppingListProducts.length; i++) {
+      if (shoppingListProducts[i].barcode == barcode) {
+        existsInShoppingListProducts = true;
+      } 
+    }
+
+    for (i=0; i<shoppingCartProducts.length; i++) {
+      if (shoppingCartProducts[i].barcode == barcode) {
+        existsInShoppingCartProducts = true
+      }
+    }
+
+    return (
+      <>
+      {
+        existsInShoppingCartProducts
+          ? 
+          <>
+            <SecondaryTitle titleType="TitleLineBottom">{" ESSE PRODUTO JA CONSTA NO CARRINHO, DESEJA MODIFICAR OS DADOS DO PRODUTO? "}</SecondaryTitle>
+            <FormHolder
+                onSubmit={(data) => {
+                  for (i=0; i<shoppingCartProducts.length; i++) {
+                    if (shoppingCartProducts[i].barcode == barcode) {
+                      shoppingCartProducts[i] = {
+                        name: productName,
+                        barcode: barcode,
+                        quantity: data.quantity
+                      }
+                    }
+                  }
+                  updateShoppingCart({
+                    products: shoppingCartProducts
+                  });
+                  if (!existsInShoppingListProducts) {
+                    addProductToShoppingListRequest({
+                      id: shoppingListId,
+                      barcode: barcode
+                    })
+                  }
+                  this.closeModal();
+                }}>
+                <Input name="quantity" inputLabel="QUANTIDADE" />
+
+                <ButtonContained type="submit"> ADICIONAR PRODUTO </ButtonContained>
+              </FormHolder>
+          </>
+          : 
+          <>
+            <SecondaryTitle titleType="TitleLineBottom">{" DESEJA ADICIONAR O PRODUTO AO CARRINHO DE COMPRAS? "}</SecondaryTitle>
+              <FormHolder
+                onSubmit={(data) => {
+                  shoppingCartProducts.push({
+                    name: productName,
+                    barcode: barcode,
+                    quantity: data.quantity
+                  })
+                  updateShoppingCart({
+                    products: shoppingCartProducts
+                  });
+                  if (!existsInShoppingListProducts) {
+                    addProductToShoppingListRequest({
+                      id: shoppingListId,
+                      barcode: barcode
+                    })
+                  }
+                  this.closeModal();
+                }}>
+                <Input name="quantity" inputLabel="QUANTIDADE" />
+
+                <ButtonContained type="submit"> ADICIONAR PRODUTO </ButtonContained>
+
+            </FormHolder>
+          </>
+      }
+      </>
+    )
+  }
+
+  RegisterProductForm = () => {
     const {addProductToShoppingListRequest} = this.props;
     const {barcode, id} = this.state.infos;
 
@@ -54,29 +139,6 @@ class AddProductToShoppingCartModal extends React.Component {
           }}
           >
             <ButtonContained type="submit"> ADICIONAR PRODUTO A LISTA DE COMPRAS </ButtonContained>
-
-        </FormHolder>
-      </>
-    )
-  }
-
-  RegisterProductForm = () => {
-    const {saveProductRequest} = this.props;
-    const {barcode} = this.state.infos;
-    return (
-      <>
-        <SecondaryTitle titleType="TitleLineBottom">{" O PRODUTO NÃO EXISTE - FAVOR REGISTRAR PRODUTO "}</SecondaryTitle>
-        <FormHolder
-          onSubmit={(data) => {
-            saveProductRequest({
-              name: data.name,
-              barcode: barcode
-            });
-            this.closeModal();
-          }}>
-            <Input name="name" inputLabel="NOME DO PRODUTO" />
-
-            <ButtonContained type="submit"> ENVIAR </ButtonContained>
 
         </FormHolder>
       </>
@@ -105,7 +167,9 @@ class AddProductToShoppingCartModal extends React.Component {
           style={styles.container}
           onDismiss={this.closeModal}>
             {
-              exists ? <this.AddProductToShoppingListForm /> : <this.RegisterProductForm />
+              exists 
+              ? <this.AddProductToShoppingCartForm /> 
+              : <this.RegisterProductForm />
             }
         </Dialog>
       </Portal>
@@ -115,15 +179,16 @@ class AddProductToShoppingCartModal extends React.Component {
 
 function mapStateToProps(state) {
   const {isFetchingAddProductToShoppingCartModal} = state.customModal;
-  const {products} = state.shoppingCart;
+  // const {products} = state.shoppingCart;
   return {
-    isFetching: isFetchingAddProductToShoppingCartModal,
-    products
+    isFetching: isFetchingAddProductToShoppingCartModal
+    // products
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  const { updateShoppingCart } = ShoppingCartCreators;
+  const { updateShoppingCart } = ShoppingCartInProgressCreators;
+  const { addProductToShoppingListRequest } = ShoppingListCreators;
   const { saveProductRequest } = RegisterProductCreators;
   return {
     updateShoppingCart: function({products}) {
@@ -132,6 +197,9 @@ function mapDispatchToProps(dispatch) {
     saveProductRequest: function ({name, barcode}) {
       return dispatch(saveProductRequest(name, barcode))
     },
+    addProductToShoppingListRequest: function({id, barcode}) {
+      return dispatch(addProductToShoppingListRequest(id, barcode));
+    }
   };
 }
 

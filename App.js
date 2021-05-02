@@ -18,7 +18,9 @@ import {
   RegisterProductModal, 
   SearchProductModal, 
   RegisterShoppingListModal, 
-  AddProductToShoppingListModal} from './src/modals/containers';
+  AddProductToShoppingListModal,
+  AddProductToShoppingCartModal
+} from './src/modals/containers';
 import Moment from 'moment';
 import 'moment/locale/pt-br';
 Moment.updateLocale('pt-br');
@@ -81,6 +83,7 @@ class App extends React.PureComponent {
               <RegisterProductModal />
               <RegisterShoppingListModal />
               <AddProductToShoppingListModal />
+              <AddProductToShoppingCartModal />
               <Modal />
               <ModalError />
             </PaperProvider>

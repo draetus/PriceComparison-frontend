@@ -1,7 +1,60 @@
 import React, { Component } from 'react';
 import { ButtonContained, Typography } from '../../../components';
+import ManualRegister from './ManualRegister';
+import BarcodeRegister from './BarcodeRegister';
 
 class ShoppingCartInProgressPresentation extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            manualAdd: false,
+            barcodeAdd: false
+
+        }
+    }
+
+    clear() {
+        this.setState({manualAdd: false, barcodeAdd: false});
+    }
+
+    Selector = () => {
+        const {manualAdd, barcodeAdd} = this.state;
+        const {id, products, shoppingListProducts, openAddProductToShoppingCartModalRequest} = this.props;
+      
+          if (manualAdd) {
+              return (
+                  <ManualRegister
+                      openAddProductToShoppingCartModalRequest={openAddProductToShoppingCartModalRequest}
+                      id={id}
+                      products={products}
+                      shoppingListProducts={shoppingListProducts}
+                      clear = {() => this.clear()}
+                  />
+              )
+          }
+      
+          if (barcodeAdd) {
+              return (
+                  <BarcodeRegister
+                      openAddProductToShoppingCartModalRequest={openAddProductToShoppingCartModalRequest}
+                      id={id}
+                      products={products}
+                      shoppingListProducts={shoppingListProducts}
+                      clear = {() => this.clear()}
+                  />
+              )
+          }
+      
+          
+          return (
+          <>
+              <ButtonContained onPress={() => this.setState({ manualAdd: true, barcodeAdd: false })}> REGISTRO MANUAL  </ ButtonContained>
+              <ButtonContained onPress={() => this.setState({ manualAdd: false, barcodeAdd: true })}> REGISTRO PELA CÂMERA  </ ButtonContained>
+          </>
+          );
+              
+      }
 
     ProductList = () => {
         const {shoppingListProducts = []} = this.props;
@@ -25,11 +78,11 @@ class ShoppingCartInProgressPresentation extends Component {
             <>
             <Typography>CARRINHO DE COMPRAS</Typography>
             {
-                products.map((item, index) => {
+                products.map((item, index) => (
                     <Typography key = {item.barcode}>
                         {item.name}
                     </Typography>
-                })
+                ))
             }
             </>
         )
@@ -48,8 +101,7 @@ class ShoppingCartInProgressPresentation extends Component {
         <Typography>{name}</Typography>
         <this.ProductList />
         <this.ShoppingCartList />
-        <ButtonContained>BUSCA MANUAL</ButtonContained>
-        <ButtonContained>BUSCA POR LEITOR DE CODIGO DE BARRAS</ButtonContained>
+        <this.Selector />
         </>
         )
     }

@@ -1,4 +1,5 @@
 import createReducers from '../../../store/createPageReducer';
+import updateShoppingCartRequest from "./updateShoppingCartRequest";
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -7,7 +8,16 @@ const {Creators, reducers, sagas} = createReducers(
       params: ['products'],
       function: (state, {products}) => ({
           ...state, 
-          products: products
+          products: products,
+          isFetching: true
+        }),
+      sagaFunction: updateShoppingCartRequest,
+    },
+    {
+      name: 'updateShoppingCartSuccess',
+      function: (state) => ({
+          ...state, 
+          isFetching: false
         }),
     },
     {
@@ -19,7 +29,8 @@ const {Creators, reducers, sagas} = createReducers(
     }
   ],
   {
-    products: []
+    products: [],
+    isFetching: false,
   },
 );
 

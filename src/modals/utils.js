@@ -4,6 +4,7 @@ let registerModalRef = null;
 let searchModalRef = null;
 let registerShoppingListModalRef = null;
 let addProductToShoppingListModalRef = null;
+let addProductToShoppingCartModalRef = null
 
 function setCustomModalRef(ref) {
   customModalRef = ref;
@@ -51,8 +52,18 @@ function setAddProductToShoppingListModalRef(ref) {
 function setAddProductToShoppingListModalInfos(barcode, exists, id) {
   addProductToShoppingListModalRef.setInfos({barcode, exists, id}, true);
 }
-function closAaddProductToShoppingListModalModal() {
+function closeAddProductToShoppingListModalModal() {
   addProductToShoppingListModalRef.closeModal();
+}
+
+function setAddProductToShoppingCartModalRef(ref) {
+  addProductToShoppingCartModalRef = ref;
+}
+function setAddProductToShoppingCartModalInfos(barcode, exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts) {
+  addProductToShoppingCartModalRef.setInfos({barcode, exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts }, true);
+}
+function closeAddProductToShoppingCartModal() {
+  addProductToShoppingCartModalRef.closeModal();
 }
 
 const customModal = {
@@ -82,8 +93,14 @@ const registerShoppingListModal = {
 const addProductToShoppingListModal = {
   setRef: setAddProductToShoppingListModalRef,
   setInfos: setAddProductToShoppingListModalInfos,
-  close: closAaddProductToShoppingListModalModal,
+  close: closeAddProductToShoppingListModalModal,
 }
+
+const addProductToShoppingCartModal = {
+  setRef: setAddProductToShoppingCartModalRef,
+  setInfos: setAddProductToShoppingCartModalInfos,
+  close: closeAddProductToShoppingCartModal,
+};
 
 // Configuração de modais de erro - Modais de erro padrão;
 let errorModalRef = null;
@@ -102,4 +119,4 @@ const errorModal = {
   close: closeErrorModal,
 };
 
-export {customModal, registerModal, searchModal, registerShoppingListModal, addProductToShoppingListModal, errorModal};
+export {customModal, registerModal, searchModal, registerShoppingListModal, addProductToShoppingListModal, addProductToShoppingCartModal, errorModal};

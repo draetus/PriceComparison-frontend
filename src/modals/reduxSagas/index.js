@@ -2,6 +2,7 @@ import createReducers from '../../store/createPageReducer';
 import openRegisterProductModalRequest from './openRegisterProductModalRequest';
 import openSearchProductModalRequest from './openSearchProductModalRequest';
 import openAddProductToShoppingListModalRequest from './openAddProductToShoppingListModalRequest';
+import openAddProductToShoppingCartModalRequest from './openAddProductToShoppingCartModalRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -64,12 +65,33 @@ const {Creators, reducers, sagas} = createReducers(
         ...state, 
         isFetchingAddProductToShoppingListModal: false
       }),
+    },
+    {
+      name: 'openAddProductToShoppingCartModalRequest',
+      params: ['barcode', 'shoppingListId', 'shoppingListProducts', 'shoppingCartProducts'],
+      function: (state) => ({...state, isFetchingAddProductToShoppingCartModal: true}),
+      sagaFunction: openAddProductToShoppingCartModalRequest,
+    },
+    {
+      name: 'openAddProductToShoppingCartModalSuccess',
+      function: (state) => ({
+        ...state,
+        isFetchingAddProductToShoppingCartModal: false,
+      })
+    },
+    {
+      name: 'openAddProductToShoppingCartModalFailure',
+      function: (state) => ({
+        ...state, 
+        isFetchingAddProductToShoppingCartModal: false
+      }),
     }
   ],
   {
     isFetchingRegisterModal: false,
     isFetchingSearchModal: false,
-    isFetchingAddProductToShoppingListModal: false
+    isFetchingAddProductToShoppingListModal: false,
+    isFetchingAddProductToShoppingCartModal: false,
   },
 );
 

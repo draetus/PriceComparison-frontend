@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Creators as ShoppingListCreators} from '../../shoppingList/reduxSagas';
 import {Creators as ShoppingCartCreators} from '../reduxSagas';
+import {Creators as CustomModalCreators} from '../../../modals/reduxSagas';
 import {ShoppingCartInProgressPresentation} from '../presentation';
 
 class ShoppingCartInProgressContainer extends Component {
@@ -13,7 +14,9 @@ class ShoppingCartInProgressContainer extends Component {
 
   render() {
 
-    const { id, name, shoppingListProducts, products, updateShoppingCart, clearShoppingCart } = this.props;
+    const { id, name, shoppingListProducts, products, updateShoppingCart, clearShoppingCart, openAddProductToShoppingCartModalRequest } = this.props;
+
+    console.log("SHOPPING CART CONTAINER: ", products);
 
     return (
       <ShoppingCartInProgressPresentation
@@ -23,6 +26,7 @@ class ShoppingCartInProgressContainer extends Component {
       products={products}
       updateShoppingCart={updateShoppingCart}
       clearShoppingCart={clearShoppingCart}
+      openAddProductToShoppingCartModalRequest={openAddProductToShoppingCartModalRequest}
       />
     )
   }
@@ -32,9 +36,9 @@ class ShoppingCartInProgressContainer extends Component {
 
 function mapStateToProps(state) {
   const {shoppingListProducts, isFetchingShoppingListProducts} = state.shoppingList;
-  const {products} = state.shoppingCart;
+  const {products, isFetching} = state.shoppingCart;
   return {
-    isFetching: isFetchingShoppingListProducts,
+    isFetching: isFetchingShoppingListProducts || isFetching,
     shoppingListProducts,
     products
   };
@@ -43,6 +47,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 const { searchShoppingListProductsRequest } = ShoppingListCreators;
 const { updateShoppingCart, clearShoppingCart } = ShoppingCartCreators;
+const { openAddProductToShoppingCartModalRequest } = CustomModalCreators;
   return {
     searchShoppingListProductsRequest: function({id}) {
       return dispatch(searchShoppingListProductsRequest(id));
@@ -52,6 +57,9 @@ const { updateShoppingCart, clearShoppingCart } = ShoppingCartCreators;
     },
     clearShoppingCart: function() {
       return dispatch(clearShoppingCart());
+    },
+    openAddProductToShoppingCartModalRequest: function({barcode, shoppingListId, shoppingListProducts, shoppingCartProducts}) {
+      return dispatch(openAddProductToShoppingCartModalRequest(barcode, shoppingListId, shoppingListProducts, shoppingCartProducts));
     }
   };
 }
