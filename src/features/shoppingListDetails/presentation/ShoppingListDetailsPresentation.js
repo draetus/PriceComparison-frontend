@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { ButtonContained, Typography } from '../../../components';
 import { goBack } from "../../../navigation/NavigationHelpers"
 import ManualRegister from './ManualRegister';
+import { Avatar, Card, IconButton } from 'react-native-paper';
 
 class ShoppingListDetailsPresentation extends Component {
 
@@ -38,11 +39,19 @@ Selector = () => {
           <Typography> LISTA DE COMPRAS</Typography>
           <ScrollView style={styles.productList}>
             {shoppingListProducts.map((item, index) => (
-                  <ButtonContained
-                  onPress={() => {
-                    deleteProductFromShoppingListRequest({id: id, barcode: item.barcode});
-                  }}
-                  key = {item.barcode}> {item.name} </ButtonContained>
+                  <Card.Title
+                  title={item.name}
+                  subtitle={item.barcode}
+                  left={(props) => <Avatar.Icon {...props} icon="shopping" />}
+                  right={(props) => <IconButton 
+                                      {...props} 
+                                      icon="delete" 
+                                      onPress={() => {
+                                        deleteProductFromShoppingListRequest({id: id, barcode: item.barcode});
+                                      }} 
+                                    />
+                  }
+                  />
               ))}
           </ScrollView>
           </>

@@ -6,7 +6,7 @@ import {api} from '../../../services';
 
 export default function* searchProductsRequest({name}) {
   try {
-    console.log("SAGA MESSAGE")
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     const response = yield call(api.searchProducts, name);
     yield put(Creators.searchProductsSuccess(response.data));
   } catch (response) {

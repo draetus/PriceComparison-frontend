@@ -6,7 +6,7 @@ import {api} from '../../../services';
 
 export default function* searchShoppingListProductsRequest({id}) {
   try {
-    console.log("SAGA MESSAGE")
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     const response = yield call(api.searchShoppingListProducts, id);
     yield put(Creators.searchShoppingListProductsSuccess(response.data));
   } catch (response) {
