@@ -1,23 +1,25 @@
 import createReducers from '../../../store/createPageReducer';
-import searchProductRequest from './searchProductRequest';
+import searchProductsRequest from './searchProductsRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [
     {
-      name: 'searchProductRequest',
-      params: ['barcode'],
+      name: 'searchProductsRequest',
+      params: ['name'],
       function: (state) => ({...state, isFetching: true}),
-      sagaFunction: searchProductRequest,
+      sagaFunction: searchProductsRequest,
     },
     {
-      name: 'searchProductSuccess',
-      function: (state) => ({
+      name: 'searchProductsSuccess',
+      params: ['products'],
+      function: (state, {products}) => ({
         ...state,
-        isFetching: false
+        isFetching: false,
+        products: products
       }),
     },
     {
-      name: 'searchProductFailure',
+      name: 'searchProductsFailure',
       function: (state) => ({
           ...state, 
           isFetching: false
@@ -25,7 +27,8 @@ const {Creators, reducers, sagas} = createReducers(
     }
   ],
   {
-    isFetching: false
+    isFetching: false,
+    products: []
   },
 );
 

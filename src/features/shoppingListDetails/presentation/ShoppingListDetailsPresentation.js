@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { ButtonContained, Input, Typography } from '../../../components';
+import { StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { ButtonContained, Typography } from '../../../components';
 import { goBack } from "../../../navigation/NavigationHelpers"
 import ManualRegister from './ManualRegister';
-import BarcodeRegister from './BarcodeRegister';
 
 class ShoppingListDetailsPresentation extends Component {
 
 constructor(props) {
     super(props);
-    this.state = {
-        manualAdd: false,
-        barcodeAdd: false
-
-    }
 }
 
 clear() {
@@ -20,36 +16,17 @@ clear() {
 }
 
 Selector = () => {
-  const {manualAdd, barcodeAdd} = this.state;
-  const {openAddProductToShoppingListModalRequest, id} = this.props;  
+  const {openAddProductToShoppingListModalRequest, searchProductsRequest, id, products} = this.props;  
 
-    if (manualAdd) {
-        return (
-            <ManualRegister
-                openAddProductToShoppingListModalRequest={openAddProductToShoppingListModalRequest}
-                id = {id}
-                clear = {() => this.clear()}
-            />
-        )
-    }
-
-    if (barcodeAdd) {
-        return (
-            <BarcodeRegister
-                openAddProductToShoppingListModalRequest={openAddProductToShoppingListModalRequest}
-                id = {id}
-                clear = {() => this.clear()}
-            />
-        )
-    }
-
-    
     return (
-    <>
-        <ButtonContained onPress={() => this.setState({ manualAdd: true, barcodeAdd: false })}> REGISTRO MANUAL  </ ButtonContained>
-        <ButtonContained onPress={() => this.setState({ manualAdd: false, barcodeAdd: true })}> REGISTRO PELA CÂMERA  </ ButtonContained>
-    </>
-    );
+        <ManualRegister
+            openAddProductToShoppingListModalRequest={openAddProductToShoppingListModalRequest}
+            searchProductsRequest={searchProductsRequest}
+            id={id}
+            products={products}
+            clear = {() => this.clear()}
+        />
+    )
         
 }
 
@@ -57,12 +34,18 @@ Selector = () => {
     const {id, shoppingListProducts = [], deleteProductFromShoppingListRequest} = this.props;
 
         return (
-          shoppingListProducts.map((item, index) => (
-                <ButtonContained onPress={() => {
-                  deleteProductFromShoppingListRequest({id: id, barcode: item.barcode});
-                }}
-                key = {item.barcode}> {item.name} </ButtonContained>
-            ))
+          <>
+          <Typography> LISTA DE COMPRAS</Typography>
+          <ScrollView style={styles.productList}>
+            {shoppingListProducts.map((item, index) => (
+                  <ButtonContained
+                  onPress={() => {
+                    deleteProductFromShoppingListRequest({id: id, barcode: item.barcode});
+                  }}
+                  key = {item.barcode}> {item.name} </ButtonContained>
+              ))}
+          </ScrollView>
+          </>
         )
   }
 
@@ -73,7 +56,8 @@ Selector = () => {
     return (
       <>
         <Typography> {name} </Typography>
-        <Typography> {"id: " + id} </Typography>
+
+        <this.Selector />
 
         <this.ProductList />
 
@@ -85,13 +69,18 @@ Selector = () => {
         >
           DELETAR LISTA
         </ButtonContained>
-
-        <this.Selector />
         
       </>
     )
   }
 
 }
+
+const styles = StyleSheet.create({
+  productList: {
+    flex: 0.1,
+    maxHeight: 300
+  }
+});
   
 export default (ShoppingListDetailsPresentation);

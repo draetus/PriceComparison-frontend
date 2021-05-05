@@ -8,7 +8,7 @@ import {api} from '../../../services';
 export default function* loginRequest({username, password}) {
   // TODO login mockado
   try {
-    console.log("SAGA MESSAGE");
+    console.log("SAGA MESSAGE")
     const response = yield call(api.login, {username, password});
     yield put(Creators.loginSuccess());
     yield put(GlobalCreators.setUserInfos(response.data));

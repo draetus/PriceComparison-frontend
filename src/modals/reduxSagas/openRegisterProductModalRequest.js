@@ -9,7 +9,7 @@ import { registerModal } from '../../modals/utils';
 
 export default function* openRegisterProductModalRequest({barcode}) {
   try {
-    console.log("SAGA MESSAGE");
+    console.log("SAGA MESSAGE")
     const response = yield call(api.checkIfExists, barcode);
 
     registerModal.setInfos(barcode, response.data.exists);

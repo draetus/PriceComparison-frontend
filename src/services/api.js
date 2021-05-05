@@ -3,8 +3,8 @@ import { create } from "apisauce";
 import { Navigation, paths } from "../navigation";
 
 // const baseURL = "http://localhost:8090"; // LOCAL
-const baseURL = "http://10.0.0.105:8090"; // PC LOCAL
-// const baseURL = "http://192.168.15.5:8090"; // PC LOCAL
+// const baseURL = "http://10.0.0.105:8090"; // PC LOCAL
+const baseURL = "http://192.168.15.9:8090"; // PC LOCAL
 
 let token = null;
 
@@ -63,6 +63,10 @@ const searchProduct = async (barcode) => {
   return await api.get("/product/" + barcode);
 }
 
+const searchProducts = async (name) => {
+  return await api.get("/product" + (name ? "?name=" + name : ""));
+}
+
 const checkIfExistsProduct = async (barcode) => {
   return await api.get("/product/exists/" + barcode);
 }
@@ -98,6 +102,7 @@ export default {
   saveProduct,
   savePriceProduct,
   searchProduct,
+  searchProducts,
   checkIfExistsProduct,
   searchShoppingList,
   createShoppingList,
