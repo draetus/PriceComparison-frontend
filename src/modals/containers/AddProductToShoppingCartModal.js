@@ -123,22 +123,22 @@ class AddProductToShoppingCartModal extends React.Component {
   }
 
   RegisterProductForm = () => {
-    const {addProductToShoppingListRequest} = this.props;
-    const {barcode, id} = this.state.infos;
-
+    const {saveProductRequest} = this.props;
+    const {barcode} = this.state.infos;
     return (
       <>
-        <SecondaryTitle titleType="TitleLineBottom">{" ADICIONAR PRODUTO A LISTA DE COMPRAS "}</SecondaryTitle>
-        <FormHolder 
+        <SecondaryTitle titleType="TitleLineBottom">{" O PRODUTO NÃO EXISTE - FAVOR REGISTRAR PRODUTO "}</SecondaryTitle>
+        <FormHolder
           onSubmit={(data) => {
-            addProductToShoppingListRequest({
-              id: id,
+            saveProductRequest({
+              name: data.name,
               barcode: barcode
             });
             this.closeModal();
-          }}
-          >
-            <ButtonContained type="submit"> ADICIONAR PRODUTO A LISTA DE COMPRAS </ButtonContained>
+          }}>
+            <Input name="name" inputLabel="NOME DO PRODUTO" />
+
+            <ButtonContained type="submit"> ENVIAR </ButtonContained>
 
         </FormHolder>
       </>
@@ -167,7 +167,7 @@ class AddProductToShoppingCartModal extends React.Component {
           style={styles.container}
           onDismiss={this.closeModal}>
             {
-              exists 
+              exists
               ? <this.AddProductToShoppingCartForm /> 
               : <this.RegisterProductForm />
             }

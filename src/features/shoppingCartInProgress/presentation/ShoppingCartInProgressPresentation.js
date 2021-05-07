@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { ButtonContained, Typography } from '../../../components';
 import ManualRegister from './ManualRegister';
 import BarcodeRegister from './BarcodeRegister';
+import { Avatar, Card } from 'react-native-paper';
+import { ScrollView } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
 
 class ShoppingCartInProgressPresentation extends Component {
 
@@ -72,19 +75,44 @@ class ShoppingCartInProgressPresentation extends Component {
         }
 
     ShoppingCartList = () => {
-        const {products = []} = this.props;
+        const {shoppingListProducts = [], products = []} = this.props;
 
         return (
-            <>
+            <ScrollView style={styles.productList}>
             <Typography>CARRINHO DE COMPRAS</Typography>
             {
-                products.map((item, index) => (
-                    <Typography key = {item.barcode}>
-                        {item.name}
-                    </Typography>
-                ))
+                shoppingListProducts.map((item, index) => {
+
+                    let selectedProduct = null;
+
+                    for (let i=0; i<products.length; i++) {
+                        if (products[i].barcode == item.barcode) {
+                            selectedProduct = products[i];
+                        }
+                    }
+                    
+                    return (
+                        selectedProduct != null && selectedProduct.quantity >= item.quantity 
+                    ?
+                        <Card.Title
+                            style={styles.productChecked}
+                            title={item.name}
+                            subtitle={"QTD: " + (selectedProduct ? selectedProduct.quantity : "0") + "/" + item.quantity}
+                            left={(props) => <Avatar.Icon {...props} icon="shopping" />}
+                            right={(props) => (<Avatar.Icon {...props} icon="check" />)}
+                        />
+                    :
+                        <Card.Title
+                            style={styles.productNotChecked}
+                            title={item.name}
+                            subtitle={"QTD: " + (selectedProduct ? selectedProduct.quantity : "0") + "/" + item.quantity}
+                            left={(props) => <Avatar.Icon {...props} icon="shopping" />}
+                            right={(props) => (<Avatar.Icon {...props} icon="window-close" />)}
+                        />
+                );
+            })
             }
-            </>
+            </ScrollView>
         )
 
 
@@ -92,14 +120,16 @@ class ShoppingCartInProgressPresentation extends Component {
 
     render() {
 
-        const { id, name, clearShoppingCart } = this.props;
+        const { name, clearShoppingCart } = this.props;
+        const {manualAdd, barcodeAdd} = this.state;
+
+        if (manualAdd || barcodeAdd) {
+            return (<this.Selector />);
+        }
 
         return (
         <>
-        <Typography>COMPRA EM PROGRESSO</Typography>
-        <Typography>{id}</Typography>
-        <Typography>{name}</Typography>
-        <this.ProductList />
+        <Card.Title style={styles.title} title={name}/>
         <this.ShoppingCartList />
         <this.Selector />
         </>
@@ -107,5 +137,18 @@ class ShoppingCartInProgressPresentation extends Component {
     }
 
 }
+
+const styles = StyleSheet.create({
+    productList: {
+      flex: 5,
+      maxHeight: 300
+    },
+    productChecked: {
+        backgroundColor: "#09ec74" // GREEN
+    },
+    productNotChecked: {
+        backgroundColor: "#ff4343" // RED
+    }
+  });
   
 export default (ShoppingCartInProgressPresentation);
