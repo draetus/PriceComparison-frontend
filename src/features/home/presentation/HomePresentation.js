@@ -23,9 +23,9 @@ class HomePresentation extends Component {
                 <ButtonContained disabled={true} style={styles.homeButton} > EDIÇÃO DE PERFIL - EM BREVE </ButtonContained>
                 <ButtonContained disabled={true} style={styles.homeButton} > CONFIGURAÇÕES - EM BREVE </ButtonContained>
             </View>
-            <View style={styles.homeSubGroup} >
-                <ButtonContained style={styles.homeButton} onPress={globalLogout} > SAIR </ButtonContained>
-            </View>
+            {/* <View style={styles.homeSubGroup} > */}
+                <ButtonContained style={styles.exitButton} onPress={globalLogout} > SAIR </ButtonContained>
+            {/* </View> */}
         </View>
         </>
         )
@@ -36,21 +36,32 @@ class HomePresentation extends Component {
 const styles = StyleSheet.create({
     homeButton: {
     //   flex: 2,
-    //   display: "flex",
-    //   flexWrap: "wrap",
-    //   flexDirection: "column"
+      display: "flex",
+      flexWrap: "wrap",
+    //   flexDirection: "row"
+    width: "50%",
+    height: 150,
+    marginBottom: 10
+    },
+    exitButton: {
+        //   flex: 2,
+      display: "flex",
+      flexWrap: "wrap",
+      //   flexDirection: "row"
+    //   width: "100%",
+      height: 150
     },
     homeGroup: {
         // flex: 1,
-        // display: "flex",
+        display: "flex",
         // flexWrap: "wrap",
         // flexDirection: "column"
     },
     homeSubGroup: {
         // flex: 1,
-        // display: "flex",
+        display: "flex",
         // flexWrap: "wrap",
-        // flexDirection: "column"
+        flexDirection: "row"
     }
   });
 

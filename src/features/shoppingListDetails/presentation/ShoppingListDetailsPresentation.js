@@ -64,7 +64,7 @@ Selector = () => {
 
     return (
       <>
-        <Typography> {name} </Typography>
+        <Card.Title titleStyle={styles.title} title={name}/>
 
         <this.Selector />
 
@@ -89,6 +89,9 @@ const styles = StyleSheet.create({
   productList: {
     flex: 0.1,
     maxHeight: 300
+  },
+  title: {
+    textAlign: "center"
   }
 });
   

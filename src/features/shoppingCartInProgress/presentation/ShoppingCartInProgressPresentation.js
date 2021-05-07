@@ -4,7 +4,7 @@ import ManualRegister from './ManualRegister';
 import BarcodeRegister from './BarcodeRegister';
 import { Avatar, Card } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 class ShoppingCartInProgressPresentation extends Component {
 
@@ -79,7 +79,6 @@ class ShoppingCartInProgressPresentation extends Component {
 
         return (
             <ScrollView style={styles.productList}>
-            <Typography>CARRINHO DE COMPRAS</Typography>
             {
                 shoppingListProducts.map((item, index) => {
 
@@ -129,7 +128,9 @@ class ShoppingCartInProgressPresentation extends Component {
 
         return (
         <>
-        <Card.Title style={styles.title} title={name}/>
+        <View>
+            <Card.Title titleStyle={styles.title} title={name}/>
+        </View>
         <this.ShoppingCartList />
         <this.Selector />
         </>
@@ -148,6 +149,9 @@ const styles = StyleSheet.create({
     },
     productNotChecked: {
         backgroundColor: "#ff4343" // RED
+    },
+    title: {
+        textAlign: "center"
     }
   });
   
