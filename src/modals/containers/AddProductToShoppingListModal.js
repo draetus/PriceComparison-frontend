@@ -48,11 +48,15 @@ class AddProductToShoppingListModal extends React.Component {
           onSubmit={(data) => {
             addProductToShoppingListRequest({
               id: id,
-              barcode: barcode
+              barcode: barcode,
+              quantity: data.quantity
             });
             this.closeModal();
           }}
           >
+            <Input name="quantity" inputLabel="QUANTIDADE" />
+
+
             <ButtonContained type="submit"> ADICIONAR PRODUTO A LISTA DE COMPRAS </ButtonContained>
 
         </FormHolder>
@@ -127,8 +131,8 @@ function mapDispatchToProps(dispatch) {
     saveProductRequest: function ({name, barcode}) {
       return dispatch(saveProductRequest(name, barcode))
     },
-    addProductToShoppingListRequest: function({id, barcode}) {
-      return dispatch(addProductToShoppingListRequest(id, barcode));
+    addProductToShoppingListRequest: function({id, barcode, quantity}) {
+      return dispatch(addProductToShoppingListRequest(id, barcode, quantity));
     }
   };
 }

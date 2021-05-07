@@ -20,8 +20,8 @@ class HomePresentation extends Component {
                 <ButtonContained icon="cart" style={styles.homeButton} onPress={Navigation.toShoppingCart}> CARRINHO DE COMPRAS </ButtonContained>
             </View>
             <View style={styles.homeSubGroup} >
-                <ButtonContained style={styles.homeButton} > EDIÇÃO DE PERFIL - EM BREVE </ButtonContained>
-                <ButtonContained style={styles.homeButton} > CONFIGURAÇÕES - EM BREVE </ButtonContained>
+                <ButtonContained disabled={true} style={styles.homeButton} > EDIÇÃO DE PERFIL - EM BREVE </ButtonContained>
+                <ButtonContained disabled={true} style={styles.homeButton} > CONFIGURAÇÕES - EM BREVE </ButtonContained>
             </View>
             <View style={styles.homeSubGroup} >
                 <ButtonContained style={styles.homeButton} onPress={globalLogout} > SAIR </ButtonContained>

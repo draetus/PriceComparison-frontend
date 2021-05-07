@@ -36,12 +36,12 @@ Selector = () => {
 
         return (
           <>
-          <Typography> LISTA DE COMPRAS</Typography>
           <ScrollView style={styles.productList}>
+          <Typography> LISTA DE COMPRAS</Typography>
             {shoppingListProducts.map((item, index) => (
                   <Card.Title
                   title={item.name}
-                  subtitle={item.barcode}
+                  subtitle={"QTD: " + item.quantity}
                   left={(props) => <Avatar.Icon {...props} icon="shopping" />}
                   right={(props) => <IconButton 
                                       {...props} 

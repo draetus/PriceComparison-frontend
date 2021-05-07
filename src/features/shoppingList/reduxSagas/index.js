@@ -95,7 +95,7 @@ const {Creators, reducers, sagas} = createReducers(
     },
     {
       name: 'addProductToShoppingListRequest',
-      params: ['id', 'barcode'],
+      params: ['id', 'barcode', 'quantity'],
       function: (state) => ({...state, isFetchingAddProductToShoppingList: true}),
       sagaFunction: addProductToShoppingListRequest,
     },

@@ -32,6 +32,7 @@ class ManualRegister extends Component {
                 autoCorrect={false}
                 data={products}
                 value={query}
+                listContainerStyle={styles.productList}
                 onChangeText={(text) => { 
                     this.setState({query: text}); 
                     if (text != "") {
@@ -47,7 +48,6 @@ class ManualRegister extends Component {
                         return (
                             <TouchableOpacity style={styles.product}
                             onPress={() => {
-                                this.setState({query: ""});
                                 openAddProductToShoppingListModalRequest({barcode: item.barcode, id: id});
                             }}>
                                 <Text>{item.name}</Text>
@@ -69,13 +69,15 @@ const styles = StyleSheet.create({
     autocompleteContainer: {
       flex: 1,
       left: 0,
-      // position: 'absolute',
       right: 0,
       top: 0,
       zIndex: 1
     },
     product: {
-        flex: 0.1
+        margin: 2
+    },
+    productList: {
+        maxHeight: 100
     }
   });
 

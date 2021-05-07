@@ -23,6 +23,7 @@ import {
 } from './src/modals/containers';
 import Moment from 'moment';
 import 'moment/locale/pt-br';
+import { Typography } from './src/components';
 Moment.updateLocale('pt-br');
 
 // symbol polyfills
@@ -75,6 +76,7 @@ class App extends React.PureComponent {
           }}>
           <Provider store={store}>
             <PaperProvider theme={Theme.light}>
+            <Typography>TITULO DA APLICAÇÃO</Typography>
               <AppNavigator
                 keepSplashScreen={() => clearTimeout(this.timeout)}
                 hideSplashScreen={this.hideSplashScreen}

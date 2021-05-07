@@ -4,10 +4,10 @@ import {Creators} from '.';
 
 import {api} from '../../../services';
 
-export default function* addProductToShoppingListRequest({id, barcode}) {
+export default function* addProductToShoppingListRequest({id, barcode, quantity}) {
   try {
-    console.log("SAGA MESSAGE");
-    yield call(api.addProductToShoppingList, id, {barcode: barcode});
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    yield call(api.addProductToShoppingList, id, {barcode: barcode, quantity: quantity});
     yield put(Creators.searchShoppingListProductsRequest(id));
     yield put(Creators.addProductToShoppingListSuccess());
   } catch (response) {
