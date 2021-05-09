@@ -7,25 +7,32 @@ export default {
 
   home: [
     {
-      name: 'Home'
+      name: 'Home',
+      title: 'Tela inicial'
     },
     {
-      name: 'RegisterProduct'
+      name: 'RegisterProduct',
+      title: 'Registrar produto'
     },
     {
-      name: 'SearchProduct'
+      name: 'SearchProduct',
+      title: 'Procurar produto'
     },
     {
-      name: 'ShoppingList'
+      name: 'ShoppingList',
+      title: 'Lista de compras'
     },
     {
-      name: 'ShoppingListDetails'
+      name: 'ShoppingListDetails',
+      title: 'Lista de compras - Detalhes'
     },
     {
-      name: 'ShoppingCart'
+      name: 'ShoppingCart',
+      title: 'Carrinho de compras'
     },
     {
-      name: 'ShoppingCartInProgress'
+      name: 'ShoppingCartInProgress',
+      title: 'Carrinho de compras - em progresso'
     }
   ],
 

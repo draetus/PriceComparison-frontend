@@ -7,13 +7,13 @@ import {api} from '../../services';
 import { addProductToShoppingCartModal } from '../../modals/utils';
 
 
-export default function* openAddProductToShoppingCartModalRequest({barcode, shoppingListId, shoppingListProducts, shoppingCartProducts}) {
+export function* openAddProductToShoppingCartModalRequest({barcode, lat, lon, shoppingListId, shoppingListProducts, shoppingCartProducts}) {
   try {
     console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     const response = yield call(api.checkIfExists, barcode);
     let productName = null;
     if (response.data.exists) {
-      const productData = yield call(api.searchProduct, barcode);
+      const productData = yield call(api.searchProduct, barcode, lat, lon);
       productName = productData.data.name;
     }
     

@@ -58,8 +58,8 @@ const { openAddProductToShoppingCartModalRequest } = CustomModalCreators;
     clearShoppingCart: function() {
       return dispatch(clearShoppingCart());
     },
-    openAddProductToShoppingCartModalRequest: function({barcode, shoppingListId, shoppingListProducts, shoppingCartProducts}) {
-      return dispatch(openAddProductToShoppingCartModalRequest(barcode, shoppingListId, shoppingListProducts, shoppingCartProducts));
+    openAddProductToShoppingCartModalRequest: function({barcode, lat, lon, shoppingListId, shoppingListProducts, shoppingCartProducts}) {
+      return dispatch(openAddProductToShoppingCartModalRequest(barcode, lat, lon, shoppingListId, shoppingListProducts, shoppingCartProducts));
     }
   };
 }

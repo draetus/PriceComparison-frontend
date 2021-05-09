@@ -7,7 +7,7 @@ import {api} from '../../services';
 import { registerModal } from '../../modals/utils';
 
 
-export default function* openRegisterProductModalRequest({barcode}) {
+export function* openRegisterProductModalRequest({barcode}) {
   try {
     console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     const response = yield call(api.checkIfExists, barcode);

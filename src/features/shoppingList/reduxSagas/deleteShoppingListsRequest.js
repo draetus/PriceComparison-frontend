@@ -5,7 +5,7 @@ import {Creators as ShoppingCartCreators} from "../../shoppingCartInProgress/red
 
 import {api} from '../../../services';
 
-export default function* deleteShoppingListsRequest({id}) {
+export function* deleteShoppingListsRequest({id}) {
   try {
     console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     yield call(api.deleteShoppingList, id);

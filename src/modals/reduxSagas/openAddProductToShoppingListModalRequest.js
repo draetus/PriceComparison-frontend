@@ -7,7 +7,7 @@ import {api} from '../../services';
 import { addProductToShoppingListModal } from '../../modals/utils';
 
 
-export default function* openAddProductToShoppingListModalRequest({barcode, id}) {
+export function* openAddProductToShoppingListModalRequest({barcode, id}) {
   try {
     console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     const response = yield call(api.checkIfExists, barcode);

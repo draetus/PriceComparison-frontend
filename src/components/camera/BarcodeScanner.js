@@ -26,14 +26,16 @@ export default class BarcodeScan extends Component {
             <View style={styles.container}>
                 <RNCamera
                     style={styles.preview}
-                    torchMode={this.state.torchOn ? RNCamera.Constants.FlashMode.on : RNCamera.Constants.FlashMode.off}
+                    flashMode={this.state.torchOn ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.off}
                     onBarCodeRead={this.onBarCodeRead}
                     ref={cam => this.camera = cam}
+                    type={RNCamera.Constants.Type.back}
+                    autoFocus={RNCamera.Constants.AutoFocus.on}
                 >
-                    <Text style={{
-                        backgroundColor: 'white'
-                    }}>
-                        BARCODE SCANNER
+                    <Text 
+                    style={styles.barcodeScannerText}
+                    >
+                        APONTE PARA UM CÓDIGO DE BARRAS
                     </Text>
                 </RNCamera>
                 <View style={styles.bottomOverlay}>
@@ -77,4 +79,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between"
     },
+    barcodeScannerText: {
+        color: "white"
+    }
 });

@@ -1,5 +1,5 @@
 import createReducers from '../../../store/createPageReducer';
-import loginRequest from './loginRequest';
+import {loginRequest} from './loginRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [

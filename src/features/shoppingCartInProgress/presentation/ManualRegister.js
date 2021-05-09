@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GetLocation from 'react-native-get-location'
 import { ButtonContained, Input, Typography } from '../../../components';
 import { FormHolder } from '../../../FormConfig';
 
@@ -11,13 +12,25 @@ class ManualRegister extends Component {
         <FormHolder
             onSubmit={(data) => {
                 const { openAddProductToShoppingCartModalRequest, clear, id, products, shoppingListProducts } = this.props;
-                openAddProductToShoppingCartModalRequest({
-                    barcode: data.barcode, 
-                    shoppingListId: id, 
-                    shoppingListProducts: shoppingListProducts, 
-                    shoppingCartProducts: products
-                });
-                clear();
+                GetLocation.getCurrentPosition({
+                    enableHighAccuracy: true,
+                    timeout: 15000,
+                  })
+                  .then(location => {
+                    openAddProductToShoppingCartModalRequest({
+                        lat: location.latitude,
+                        lon: location.longitude,
+                        barcode: data.barcode, 
+                        shoppingListId: id, 
+                        shoppingListProducts: shoppingListProducts, 
+                        shoppingCartProducts: products
+                    });
+                    clear();
+                  })
+                  .catch(error => {
+                      const { code, message } = error;
+                      console.warn(code, message);
+                  })
             }}
         >
             <Input name="barcode" inputLabel="CÓDIGO DE BARRAS" />

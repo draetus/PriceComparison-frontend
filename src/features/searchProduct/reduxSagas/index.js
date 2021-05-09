@@ -1,5 +1,5 @@
 import createReducers from '../../../store/createPageReducer';
-import searchProductsRequest from './searchProductsRequest';
+import {searchProductsRequest} from './searchProductsRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [

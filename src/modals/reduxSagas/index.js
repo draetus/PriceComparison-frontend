@@ -1,8 +1,8 @@
 import createReducers from '../../store/createPageReducer';
-import openRegisterProductModalRequest from './openRegisterProductModalRequest';
-import openSearchProductModalRequest from './openSearchProductModalRequest';
-import openAddProductToShoppingListModalRequest from './openAddProductToShoppingListModalRequest';
-import openAddProductToShoppingCartModalRequest from './openAddProductToShoppingCartModalRequest';
+import {openRegisterProductModalRequest} from './openRegisterProductModalRequest';
+import {openSearchProductModalRequest} from './openSearchProductModalRequest';
+import {openAddProductToShoppingListModalRequest} from './openAddProductToShoppingListModalRequest';
+import {openAddProductToShoppingCartModalRequest} from './openAddProductToShoppingCartModalRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -28,7 +28,7 @@ const {Creators, reducers, sagas} = createReducers(
     },
     {
       name: 'openSearchProductModalRequest',
-      params: ['barcode'],
+      params: ['barcode', 'lat', 'lon'],
       function: (state) => ({...state, isFetchingSearchModal: true}),
       sagaFunction: openSearchProductModalRequest,
     },
@@ -68,7 +68,7 @@ const {Creators, reducers, sagas} = createReducers(
     },
     {
       name: 'openAddProductToShoppingCartModalRequest',
-      params: ['barcode', 'shoppingListId', 'shoppingListProducts', 'shoppingCartProducts'],
+      params: ['barcode', 'lat', 'lon', 'shoppingListId', 'shoppingListProducts', 'shoppingCartProducts'],
       function: (state) => ({...state, isFetchingAddProductToShoppingCartModal: true}),
       sagaFunction: openAddProductToShoppingCartModalRequest,
     },

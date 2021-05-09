@@ -4,7 +4,7 @@ import {Creators} from '.';
 
 import {api} from '../../../services';
 
-export default function* searchShoppingListProductsRequest({id}) {
+export function* searchShoppingListProductsRequest({id}) {
   try {
     console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     const response = yield call(api.searchShoppingListProducts, id);

@@ -7,9 +7,11 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Metrics, pagesConfig} from '../config';
 import DrawerContent from './DrawerContent';
 import * as Pages from '../pages';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Creators as LoginCreators} from '../features/login/reduxSagas';
 import {LocalStorage} from '../lib';
+import { Typography } from '../components';
+import { Appbar } from 'react-native-paper';
 
 function returnStackConfig(pages = []) {
   const Stack = createStackNavigator();
@@ -40,7 +42,19 @@ function returnDrawerConfig(pages = []) {
         <Drawer.Screen
           key={i}
           name={pages[i].name}
-          component={Pages[pages[i].name]}
+          component={(navigation) => {
+            const Component = Pages[pages[i].name];
+            return (
+              <>
+              <Appbar.Header statusBarHeight={-5} style={styles.header}>
+                <Appbar.BackAction onPress={NavigationService.goBack} />
+                <Appbar.Content title={pages[i].title} />
+              </Appbar.Header>
+              {/* <Typography> {pages[i].title} </Typography> */}
+              <Component {...navigation} />
+              </>
+            )
+          }}
           options={{headerShown: false}}
         />
       );
@@ -84,7 +98,7 @@ class AppNavigator extends React.PureComponent {
   }
   render() {
     return (
-      <>
+      <View style={styles.page}>
         <NavigationContainer
           ref={(navigatorRef) => {
             NavigationService.setTopLevelNavigator(navigatorRef);
@@ -95,7 +109,7 @@ class AppNavigator extends React.PureComponent {
           {/* {this.props.isLoggedIn ? returnStackConfig(pagesConfig.home) : null} */}
           {this.props.isLoggedIn ? returnDrawerConfig(pagesConfig.home) : null}
         </NavigationContainer>
-      </>
+      </ View>
     );
   }
 }
@@ -123,4 +137,15 @@ const styles = StyleSheet.create({
     width: Metrics.screenWidth,
     padding: 0,
   },
+  page: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  header: {
+    // maxHeight: 0,
+    backgroundColor: "#0000FF"
+  },
+  content: {
+    maxHeight: 10
+  }
 });

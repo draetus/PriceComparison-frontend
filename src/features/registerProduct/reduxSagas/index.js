@@ -1,6 +1,6 @@
 import createReducers from '../../../store/createPageReducer';
-import saveProductRequest from "./saveProductRequest";
-import savePriceProductRequest from "./savePriceProductRequest";
+import {saveProductRequest} from "./saveProductRequest";
+import {savePriceProductRequest} from "./savePriceProductRequest";
 
 const {Creators, reducers, sagas} = createReducers(
   [

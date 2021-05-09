@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GetLocation from 'react-native-get-location';
 import { ButtonContained, Input, Typography } from '../../../components';
 import { FormHolder } from '../../../FormConfig';
 
@@ -11,7 +12,21 @@ class SearchProductPresentation extends Component {
             <Typography>BUSCA DE PRODUTOS MANUAL</Typography>
             <FormHolder
             onSubmit={(data) => {
-                openSearchProductModalRequest({barcode: data.barcode});
+                GetLocation.getCurrentPosition({
+                    enableHighAccuracy: true,
+                    timeout: 15000,
+                  })
+                  .then(location => {
+                    openSearchProductModalRequest({
+                        lat: location.latitude,
+                        lon: location.longitude,
+                        barcode: data.barcode
+                    });
+                  })
+                  .catch(error => {
+                      const { code, message } = error;
+                      console.warn(code, message);
+                  })
             }}
             >
 

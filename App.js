@@ -76,7 +76,6 @@ class App extends React.PureComponent {
           }}>
           <Provider store={store}>
             <PaperProvider theme={Theme.light}>
-            <Typography>TITULO DA APLICAÇÃO</Typography>
               <AppNavigator
                 keepSplashScreen={() => clearTimeout(this.timeout)}
                 hideSplashScreen={this.hideSplashScreen}

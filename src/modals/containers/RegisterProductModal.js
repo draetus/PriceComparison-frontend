@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Portal, Dialog, withTheme} from 'react-native-paper';
+import GetLocation from 'react-native-get-location'
 import {registerModal} from '../utils';
 import {Metrics} from '../../config';
 import { FormHolder } from '../../FormConfig';
@@ -45,12 +46,22 @@ class RegisterProductModal extends React.Component {
         <SecondaryTitle titleType="TitleLineBottom">{" INFORME O PREÇO DO PRODUTO "}</SecondaryTitle>
         <FormHolder 
           onSubmit={(data) => {
-            savePriceProductRequest({
-              price: data.price,
-              barcode: barcode,
-              latitude: 0,
-              longitude: 0
-            });
+            GetLocation.getCurrentPosition({
+              enableHighAccuracy: true,
+              timeout: 15000,
+            })
+            .then(location => {
+              savePriceProductRequest({
+                price: data.price,
+                barcode: barcode,
+                latitude: location.latitude,
+                longitude: location.longitude
+              });
+            })
+            .catch(error => {
+                const { code, message } = error;
+                console.warn(code, message);
+            })
             this.closeModal();
           }}
           >

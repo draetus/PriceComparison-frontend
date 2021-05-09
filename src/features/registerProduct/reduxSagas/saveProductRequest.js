@@ -4,7 +4,7 @@ import {Creators} from '.';
 
 import {api} from '../../../services';
 
-export default function* saveProductRequest({name, barcode}) {
+export function* saveProductRequest({name, barcode}) {
   try {
     console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     yield call(api.saveProduct, {name, barcode});

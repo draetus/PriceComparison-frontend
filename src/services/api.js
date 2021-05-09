@@ -59,8 +59,9 @@ const savePriceProduct = async (data) => {
   return await api.post("/price", data);
 }
 
-const searchProduct = async (barcode) => {
-  return await api.get("/product/" + barcode);
+const searchProduct = async (barcode, lat, lon) => {
+  console.log("API: ", {barcode, lat, lon});
+  return await api.get("/product/" + barcode + "/" + lat.toString() + "/" + lon.toString());
 }
 
 const searchProducts = async (name) => {

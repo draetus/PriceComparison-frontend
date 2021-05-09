@@ -1,10 +1,10 @@
 import createReducers from '../../../store/createPageReducer';
-import searchShoppingListsRequest from './searchShoppingListsRequest';
-import createShoppingListsRequest from './createShoppingListsRequest';
-import deleteShoppingListsRequest from './deleteShoppingListsRequest';
-import searchShoppingListProductsRequest from "./searchShoppingListProductsRequest";
-import addProductToShoppingListRequest from './addProductToShoppingListRequest';
-import deleteProductFromShoppingListRequest from './deleteProductFromShoppingListRequest';
+import {searchShoppingListsRequest} from './searchShoppingListsRequest';
+import {createShoppingListsRequest} from './createShoppingListsRequest';
+import {deleteShoppingListsRequest} from './deleteShoppingListsRequest';
+import {searchShoppingListProductsRequest} from "./searchShoppingListProductsRequest";
+import {addProductToShoppingListRequest} from './addProductToShoppingListRequest';
+import {deleteProductFromShoppingListRequest} from './deleteProductFromShoppingListRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [

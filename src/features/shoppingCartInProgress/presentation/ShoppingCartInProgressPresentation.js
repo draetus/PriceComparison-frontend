@@ -80,7 +80,7 @@ class ShoppingCartInProgressPresentation extends Component {
         return (
             <ScrollView style={styles.productList}>
             {
-                shoppingListProducts.map((item, index) => {
+                [...shoppingListProducts, ...shoppingListProducts].map((item, index) => {
 
                     let selectedProduct = null;
 
@@ -128,9 +128,7 @@ class ShoppingCartInProgressPresentation extends Component {
 
         return (
         <>
-        <View>
-            <Card.Title titleStyle={styles.title} title={name}/>
-        </View>
+        <Card.Title titleStyle={styles.title} title={name}/>
         <this.ShoppingCartList />
         <this.Selector />
         </>
@@ -141,8 +139,7 @@ class ShoppingCartInProgressPresentation extends Component {
 
 const styles = StyleSheet.create({
     productList: {
-      flex: 5,
-      maxHeight: 300
+      flex: 1
     },
     productChecked: {
         backgroundColor: "#09ec74" // GREEN

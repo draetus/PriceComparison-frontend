@@ -26,8 +26,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     const { openSearchProductModalRequest } = CustomModalCreators;
     return {
-      openSearchProductModalRequest: function ({barcode}) {
-        return dispatch(openSearchProductModalRequest(barcode));
+      openSearchProductModalRequest: function ({barcode, lat, lon}) {
+        console.log("DISPATCH: ", {barcode, lat, lon});
+        return dispatch(openSearchProductModalRequest(barcode, lat, lon));
       }
     };
   }

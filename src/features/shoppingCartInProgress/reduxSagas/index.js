@@ -1,5 +1,5 @@
 import createReducers from '../../../store/createPageReducer';
-import updateShoppingCartRequest from "./updateShoppingCartRequest";
+import {updateShoppingCartRequest} from "./updateShoppingCartRequest";
 
 const {Creators, reducers, sagas} = createReducers(
   [

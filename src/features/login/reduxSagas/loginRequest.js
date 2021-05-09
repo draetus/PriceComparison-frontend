@@ -5,7 +5,7 @@ import {Creators as GlobalCreators} from '../../globalReduxSagas';
 
 import {api} from '../../../services';
 
-export default function* loginRequest({username, password}) {
+export function* loginRequest({username, password}) {
   // TODO login mockado
   try {
     console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");

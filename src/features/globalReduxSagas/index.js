@@ -1,5 +1,5 @@
 import createReducers from '../../store/createPageReducer';
-import logoutFunction from './logoutFunction';
+import {logoutFunction} from './logoutFunction';
 
 const {Creators, reducers, sagas} = createReducers(
   [

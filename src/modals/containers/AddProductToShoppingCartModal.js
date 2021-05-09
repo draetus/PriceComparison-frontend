@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Portal, Dialog, withTheme} from 'react-native-paper';
+import GetLocation from 'react-native-get-location'
 import {addProductToShoppingCartModal} from '../utils';
 import {Metrics} from '../../config';
 import { FormHolder } from '../../FormConfig';
@@ -39,7 +40,7 @@ class AddProductToShoppingCartModal extends React.Component {
   };
 
   AddProductToShoppingCartForm = () => {
-    const {updateShoppingCart, addProductToShoppingListRequest} = this.props;
+    const {updateShoppingCart, addProductToShoppingListRequest, savePriceProductRequest} = this.props;
     const {barcode, productName, shoppingListId, shoppingCartProducts = [], shoppingListProducts = []} = this.state.infos;
     let existsInShoppingListProducts = false;
     let existsInShoppingCartProducts = false;
@@ -70,7 +71,8 @@ class AddProductToShoppingCartModal extends React.Component {
                       shoppingCartProducts[i] = {
                         name: productName,
                         barcode: barcode,
-                        quantity: data.quantity
+                        quantity: data.quantity,
+                        price: data.price
                       }
                     }
                   }
@@ -83,9 +85,27 @@ class AddProductToShoppingCartModal extends React.Component {
                       barcode: barcode
                     })
                   }
+                  GetLocation.getCurrentPosition({
+                    enableHighAccuracy: true,
+                    timeout: 15000,
+                  })
+                  .then(location => {
+                    savePriceProductRequest({
+                      price: data.price,
+                      barcode: barcode,
+                      latitude: location.latitude,
+                      longitude: location.longitude
+                    });
+                  })
+                  .catch(error => {
+                      const { code, message } = error;
+                      console.warn(code, message);
+                  })
                   this.closeModal();
                 }}>
-                <Input name="quantity" inputLabel="QUANTIDADE" />
+                <Input name="quantity" inputLabel="QUANTIDADE" required={true} />
+
+                <Input name="price" inputLabel="PREÇO" required={true}/>
 
                 <ButtonContained type="submit"> ADICIONAR PRODUTO </ButtonContained>
               </FormHolder>
@@ -98,7 +118,8 @@ class AddProductToShoppingCartModal extends React.Component {
                   shoppingCartProducts.push({
                     name: productName,
                     barcode: barcode,
-                    quantity: data.quantity
+                    quantity: data.quantity,
+                    price: data.price
                   })
                   updateShoppingCart({
                     products: shoppingCartProducts
@@ -109,9 +130,27 @@ class AddProductToShoppingCartModal extends React.Component {
                       barcode: barcode
                     })
                   }
+                  GetLocation.getCurrentPosition({
+                    enableHighAccuracy: true,
+                    timeout: 15000,
+                  })
+                  .then(location => {
+                    savePriceProductRequest({
+                      price: data.price,
+                      barcode: barcode,
+                      latitude: location.latitude,
+                      longitude: location.longitude
+                    });
+                  })
+                  .catch(error => {
+                      const { code, message } = error;
+                      console.warn(code, message);
+                  })
                   this.closeModal();
                 }}>
-                <Input name="quantity" inputLabel="QUANTIDADE" />
+                <Input name="quantity" inputLabel="QUANTIDADE" required={true}/>
+
+                <Input name="price" inputLabel="PREÇO" required={true}/>
 
                 <ButtonContained type="submit"> ADICIONAR PRODUTO </ButtonContained>
 
@@ -189,13 +228,16 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   const { updateShoppingCart } = ShoppingCartInProgressCreators;
   const { addProductToShoppingListRequest } = ShoppingListCreators;
-  const { saveProductRequest } = RegisterProductCreators;
+  const { saveProductRequest, savePriceProductRequest } = RegisterProductCreators;
   return {
     updateShoppingCart: function({products}) {
       return dispatch(updateShoppingCart(products));
     },
     saveProductRequest: function ({name, barcode}) {
       return dispatch(saveProductRequest(name, barcode))
+    },
+    savePriceProductRequest: function ({price, barcode, latitude, longitude}) {
+      return dispatch(savePriceProductRequest(price, barcode, latitude, longitude))
     },
     addProductToShoppingListRequest: function({id, barcode}) {
       return dispatch(addProductToShoppingListRequest(id, barcode));
