@@ -1,5 +1,6 @@
 import createReducers from '../../../store/createPageReducer';
 import {searchProductsRequest} from './searchProductsRequest';
+import {searchSingleProductRequest} from './searchSingleProductRequest';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -24,11 +25,35 @@ const {Creators, reducers, sagas} = createReducers(
           ...state, 
           isFetching: false
         }),
+    },
+    {
+      name: 'searchSingleProductRequest',
+      params: ['barcode', 'lat', 'lon'],
+      function: (state) => ({...state, isFetchingSingleProduct: true}),
+      sagaFunction: searchSingleProductRequest,
+    },
+    {
+      name: 'searchSingleProductSuccess',
+      params: ['singleProduct'],
+      function: (state, {singleProduct}) => ({
+        ...state,
+        isFetchingSingleProduct: false,
+        singleProduct: singleProduct
+      }),
+    },
+    {
+      name: 'searchSingleProductFailure',
+      function: (state) => ({
+          ...state, 
+          isFetchingSingleProduct: false
+        }),
     }
   ],
   {
     isFetching: false,
-    products: []
+    isFetchingSingleProduct: false,
+    products: [],
+    singleProduct: null
   },
 );
 

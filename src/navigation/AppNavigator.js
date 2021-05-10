@@ -44,6 +44,16 @@ function returnDrawerConfig(pages = []) {
           name={pages[i].name}
           component={(navigation) => {
             const Component = Pages[pages[i].name];
+            if (pages[i].name == 'Home') {
+              return (
+                <>
+                <Appbar.Header statusBarHeight={-5} style={styles.header}>
+                  <Appbar.Content title={pages[i].title} />
+                </Appbar.Header>
+                <Component {...navigation} />
+                </>
+              )
+            }
             return (
               <>
               <Appbar.Header statusBarHeight={-5} style={styles.header}>
@@ -143,7 +153,7 @@ const styles = StyleSheet.create({
   },
   header: {
     // maxHeight: 0,
-    backgroundColor: "#0000FF"
+    backgroundColor: "#a10013"
   },
   content: {
     maxHeight: 10

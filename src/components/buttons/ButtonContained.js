@@ -63,7 +63,7 @@ function createStyles(props) {
   return StyleSheet.create({
     container: {
       marginVertical: Metrics.spacingMinimun,
-      borderRadius: 8,
+      // borderRadius: 8,
       alignSelf: props.alignSelf,
 
       height: Metrics.spacingXLG,

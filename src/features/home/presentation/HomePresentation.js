@@ -17,7 +17,7 @@ class HomePresentation extends Component {
             </View>
             <View style={styles.homeSubGroup} >
                 <ButtonContained icon="magnify" style={styles.homeButton} onPress={Navigation.toSearchProduct}> PESQUISAR PRODUTO </ButtonContained>
-                <ButtonContained icon="cart" style={styles.homeButton} onPress={Navigation.toShoppingCart}> CARRINHO DE COMPRAS </ButtonContained>
+                <ButtonContained icon="cart-outline" style={styles.homeButton} onPress={Navigation.toShoppingCart}> CARRINHO DE COMPRAS </ButtonContained>
             </View>
             <View style={styles.homeSubGroup} >
                 <ButtonContained disabled={true} style={styles.homeButton} > EDIÇÃO DE PERFIL - EM BREVE </ButtonContained>
@@ -37,12 +37,15 @@ const styles = StyleSheet.create({
       flexWrap: "wrap",
         width: "50%",
         height: 150,
-        marginBottom: 10
+        borderColor: "#a10013",
+        borderWidth: 2
     },
     exitButton: {
       display: "flex",
       flexWrap: "wrap",
-      height: 150
+      height: 150,
+      borderColor: "#a10013",
+      borderWidth: 2,
     },
     homeGroup: {
         display: "flex",

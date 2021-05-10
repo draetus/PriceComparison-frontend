@@ -8,7 +8,7 @@ export default {
   home: [
     {
       name: 'Home',
-      title: 'Tela inicial'
+      title: 'Home'
     },
     {
       name: 'RegisterProduct',

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
     Text,
     View,
@@ -6,8 +7,10 @@ import {
     TouchableOpacity,
     Image } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import GetLocation from 'react-native-get-location';
+import { Creators as SearchProductCreators } from '../../features/searchProduct/reduxSagas';
 
-export default class BarcodeScan extends Component {
+class BarcodeScanner extends Component {
     constructor(props) {
         super(props);
         this.handleTourch = this.handleTourch.bind(this);
@@ -17,11 +20,32 @@ export default class BarcodeScan extends Component {
     }
 
     onBarCodeRead = (e) => {
-        const {onBarCodeRead} = this.props;
-        onBarCodeRead(e.data);
+        const {onBarCodeRead, searchSingleProductRequest} = this.props;
+
+        GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 15000,
+          })
+          .then(location => {
+            searchSingleProductRequest({
+                barcode: e.data, 
+                lat: location.latitude, 
+                lon: location.longitude
+            }); 
+            console.log("ENVIOU LOCALIZAÇÃO");
+          })
+          .catch(error => {
+              const { code, message } = error;
+              console.warn(code, message);
+          })
+
+        // onBarCodeRead(e.data);
     }
 
     render() {
+        const {singleProduct} = this.props;
+
+        console.log("RENDER: ", singleProduct);
         return (
             <View style={styles.container}>
                 <RNCamera
@@ -32,11 +56,23 @@ export default class BarcodeScan extends Component {
                     type={RNCamera.Constants.Type.back}
                     autoFocus={RNCamera.Constants.AutoFocus.on}
                 >
-                    <Text 
-                    style={styles.barcodeScannerText}
-                    >
-                        APONTE PARA UM CÓDIGO DE BARRAS
-                    </Text>
+                    {
+                        singleProduct != null ?
+                        (
+                        <>
+                        <Text style={styles.bestPrice}> {"R$ " + singleProduct.bestPrice.price} </Text>
+                        <Text style={styles.bestPrice}> { + singleProduct.bestPrice.distance + " Metros"} </Text>
+                        <Text style={styles.bestPriceNear}> {"R$ " +singleProduct.bestPriceNear.price} </Text>
+                        <Text style={styles.bestPriceNear}> {singleProduct.bestPriceNear.distance + " Metros"} </Text>
+                        <Text style={styles.averagePrice}> {"R$ " + singleProduct.averagePrice} </Text>
+                        <Text style={styles.barcodeScannerText}> {singleProduct.name} </Text>
+                        </>
+                        )
+                        : <></>
+
+                    }
+                    
+                    <Text style={styles.barcodeScannerText}> APONTE PARA UM CÓDIGO DE BARRAS </Text>
                 </RNCamera>
                 <View style={styles.bottomOverlay}>
                     <TouchableOpacity onPress={() => this.handleTourch(this.state.torchOn)}>
@@ -81,5 +117,32 @@ const styles = StyleSheet.create({
     },
     barcodeScannerText: {
         color: "white"
+    },
+    averagePrice: {
+        backgroundColor: "#0000ff"
+    },
+    bestPrice: {
+        backgroundColor: "#008000"
+    },
+    bestPriceNear: {
+        backgroundColor: "#ffff00"
     }
 });
+
+function mapStateToProps(state) {
+    const {singleProduct} = state.searchProduct;
+    return {
+        singleProduct
+    };
+  }
+  
+function mapDispatchToProps(dispatch) {
+    const { searchSingleProductRequest } = SearchProductCreators;
+    return {
+      searchSingleProductRequest: function ({barcode, lat, lon}) {
+        return dispatch(searchSingleProductRequest(barcode, lat, lon));
+      }
+    };
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(BarcodeScanner);

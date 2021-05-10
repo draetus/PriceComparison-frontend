@@ -145,7 +145,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#09ec74" // GREEN
     },
     productNotChecked: {
-        backgroundColor: "#ff4343" // RED
+        // backgroundColor: "#ff4343" // RED
+        color: "#ff4343"
     },
     title: {
         textAlign: "center"

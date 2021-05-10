@@ -83,8 +83,8 @@ const light = {
   colors: {
     ...commonTheme.colors,
 
-    buttonText: white,
-    buttonBackground: husk,
+    buttonText: "#a10013",
+    buttonBackground: "#ffe4e1",
 
     buttonAlternativeText: darkBlue,
     buttonAlternativeBackground: white,
