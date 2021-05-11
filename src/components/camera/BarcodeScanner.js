@@ -9,6 +9,7 @@ import {
 import { RNCamera } from 'react-native-camera';
 import GetLocation from 'react-native-get-location';
 import { Creators as SearchProductCreators } from '../../features/searchProduct/reduxSagas';
+import { ButtonContained } from '..';
 
 class BarcodeScanner extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class BarcodeScanner extends Component {
     }
 
     render() {
-        const {singleProduct} = this.props;
+        const {singleProduct, clearSingleProduct, onBarCodeRead} = this.props;
 
         console.log("RENDER: ", singleProduct);
         return (
@@ -65,14 +66,18 @@ class BarcodeScanner extends Component {
                         <Text style={styles.bestPriceNear}> {"R$ " +singleProduct.bestPriceNear.price} </Text>
                         <Text style={styles.bestPriceNear}> {singleProduct.bestPriceNear.distance + " Metros"} </Text>
                         <Text style={styles.averagePrice}> {"R$ " + singleProduct.averagePrice} </Text>
+                        {onBarCodeRead 
+                        ? (<ButtonContained onPress={() => {onBarCodeRead(singleProduct.barcode);}}> CONCLUIR </ButtonContained>)
+                        : <></>
+                        }
+                        <ButtonContained onPress={clearSingleProduct}> LIMPAR </ButtonContained>
                         <Text style={styles.barcodeScannerText}> {singleProduct.name} </Text>
                         </>
                         )
-                        : <></>
-
+                        : <Text style={styles.barcodeScannerText}> APONTE PARA UM CÓDIGO DE BARRAS </Text>
                     }
                     
-                    <Text style={styles.barcodeScannerText}> APONTE PARA UM CÓDIGO DE BARRAS </Text>
+                    
                 </RNCamera>
                 <View style={styles.bottomOverlay}>
                     <TouchableOpacity onPress={() => this.handleTourch(this.state.torchOn)}>
@@ -137,10 +142,13 @@ function mapStateToProps(state) {
   }
   
 function mapDispatchToProps(dispatch) {
-    const { searchSingleProductRequest } = SearchProductCreators;
+    const { searchSingleProductRequest, clearSingleProduct } = SearchProductCreators;
     return {
       searchSingleProductRequest: function ({barcode, lat, lon}) {
         return dispatch(searchSingleProductRequest(barcode, lat, lon));
+      },
+      clearSingleProduct: function() {
+          return dispatch(clearSingleProduct());
       }
     };
   }

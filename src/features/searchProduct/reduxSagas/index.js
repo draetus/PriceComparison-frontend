@@ -47,6 +47,13 @@ const {Creators, reducers, sagas} = createReducers(
           ...state, 
           isFetchingSingleProduct: false
         }),
+    },
+    {
+      name: 'clearSingleProduct',
+      function: (state) => ({
+          ...state, 
+          singleProduct: null
+        }),
     }
   ],
   {

@@ -29,7 +29,7 @@ class SearchProductPresentation extends Component {
         return (
         <>
             <BarcodeScanner
-            onBarCodeRead={this.onBarCodeRead} 
+            onBarCodeRead={null} 
             />
         </>
         )

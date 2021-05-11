@@ -80,7 +80,7 @@ class ShoppingCartInProgressPresentation extends Component {
         return (
             <ScrollView style={styles.productList}>
             {
-                [...shoppingListProducts, ...shoppingListProducts].map((item, index) => {
+                shoppingListProducts.map((item, index) => {
 
                     let selectedProduct = null;
 
