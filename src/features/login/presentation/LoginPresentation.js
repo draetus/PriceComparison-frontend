@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { ButtonContained, InputCPF, InputPassword } from "../../../components";
 import { FormHolder } from "../../../FormConfig";
-import loginRequest from '../reduxSagas/loginRequest';
 
 class LoginPresentation extends Component {
 
@@ -17,12 +16,23 @@ class LoginPresentation extends Component {
             <InputCPF name="username" defaultValue={"11411085930"}/>
             <InputPassword name="password" defaultValue={"0xff8029"}/>
 
-            <ButtonContained type="submit" loading={false} > LOGIN </ButtonContained>
+            <ButtonContained style={styles.loginButton} type="submit" loading={false} > LOGIN </ButtonContained>
         </FormHolder>
         )
 
     }
 
 }
+
+const styles = StyleSheet.create({
+    loginButton: {
+        display: "flex",
+        flexWrap: "wrap",
+        borderColor: "#a10013",
+        borderWidth: 2,
+        marginLeft: 50,
+        marginRight: 50
+    }
+  });
 
 export default LoginPresentation;

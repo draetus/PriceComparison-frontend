@@ -3,6 +3,7 @@ import { ButtonContained, Input, Typography } from '../../../components';
 import SearchProductPresentation from './SearchProductPresentation';
 import BarcodeSearchProductPresentation from './BarcodeSearchProductPresentation';
 import { ProductDataPresentation } from '.';
+import { StyleSheet, View } from 'react-native';
 
 class SearchProductSelectorPresentation extends Component {
 
@@ -17,10 +18,12 @@ class SearchProductSelectorPresentation extends Component {
 
     Selector = () => {
         return (
-            <>
-                <ButtonContained onPress={() => this.setState({ manualSearch: true, barcodeSearch: false })}> BUSCA MANUAL  </ ButtonContained>
-                <ButtonContained onPress={() => this.setState({ manualSearch: false, barcodeSearch: true })}> BUSCA PELA CÂMERA  </ ButtonContained>
-            </>
+            <View style={styles.selectorGroup}>
+                <View style={styles.selectorSubGroup}>
+                    <ButtonContained style={styles.selectorButton} onPress={() => this.setState({ manualSearch: true, barcodeSearch: false })}> BUSCA MANUAL  </ ButtonContained>
+                    <ButtonContained style={styles.selectorButton} onPress={() => this.setState({ manualSearch: false, barcodeSearch: true })}> BUSCA PELA CÂMERA  </ ButtonContained>
+                </View>
+            </View>
         )
     }
 
@@ -62,5 +65,24 @@ class SearchProductSelectorPresentation extends Component {
     }
 
 }
+
+const styles = StyleSheet.create({
+    selectorButton: {
+        display: "flex",
+        flexWrap: "wrap",
+        width: "45%",
+        borderColor: "#a10013",
+        borderWidth: 2,
+        marginLeft: 10,
+        marginRight: 10
+    },
+    selectorGroup: {
+        display: "flex",
+    },
+    selectorSubGroup: {
+        display: "flex",
+        flexDirection: "row"
+    }
+  });
 
 export default SearchProductSelectorPresentation;

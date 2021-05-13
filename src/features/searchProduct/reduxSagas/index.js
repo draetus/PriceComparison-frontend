@@ -1,6 +1,9 @@
 import createReducers from '../../../store/createPageReducer';
-import {searchProductsRequest} from './searchProductsRequest';
-import {searchSingleProductRequest} from './searchSingleProductRequest';
+// import {searchProductsRequest} from './searchProductsRequest';
+// import {searchSingleProductRequest} from './searchSingleProductRequest';
+import {put, call} from 'redux-saga/effects';
+
+import {api} from '../../../services';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -63,5 +66,25 @@ const {Creators, reducers, sagas} = createReducers(
     singleProduct: null
   },
 );
+
+function* searchProductsRequest({name}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    const response = yield call(api.searchProducts, name);
+    yield put(Creators.searchProductsSuccess(response.data));
+  } catch (response) {
+    yield put(Creators.searchProductsFailure());
+  }
+}
+
+function* searchSingleProductRequest({barcode, lat, lon}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    const response = yield call(api.searchProduct, barcode, lat, lon);
+    yield put(Creators.searchSingleProductSuccess(response.data));
+  } catch (response) {
+    yield put(Creators.searchSingleProductFailure());
+  }
+}
 
 export {Creators, reducers, sagas};

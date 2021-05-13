@@ -1,6 +1,9 @@
 import createReducers from '../../../store/createPageReducer';
-import {saveProductRequest} from "./saveProductRequest";
-import {savePriceProductRequest} from "./savePriceProductRequest";
+// import {saveProductRequest} from "./saveProductRequest";
+// import {savePriceProductRequest} from "./savePriceProductRequest";
+import {put, call} from 'redux-saga/effects';
+
+import {api} from '../../../services';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -44,5 +47,25 @@ const {Creators, reducers, sagas} = createReducers(
     isFetchingPrice: false,
   },
 );
+
+function* savePriceProductRequest({price, barcode, latitude, longitude}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    yield call(api.savePriceProduct, {price, barcode, latitude, longitude});
+    yield put(Creators.savePriceProductSuccess());
+  } catch (response) {
+    yield put(Creators.savePriceProductFailure());
+  }
+}
+
+function* saveProductRequest({name, barcode}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    yield call(api.saveProduct, {name, barcode});
+    yield put(Creators.saveProductSuccess());
+  } catch (response) {
+    yield put(Creators.saveProductFailure());
+  }
+}
 
 export {Creators, reducers, sagas};

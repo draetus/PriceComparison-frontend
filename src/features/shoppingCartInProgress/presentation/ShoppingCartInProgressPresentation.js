@@ -51,10 +51,12 @@ class ShoppingCartInProgressPresentation extends Component {
       
           
           return (
-          <>
-              <ButtonContained onPress={() => this.setState({ manualAdd: true, barcodeAdd: false })}> REGISTRO MANUAL  </ ButtonContained>
-              <ButtonContained onPress={() => this.setState({ manualAdd: false, barcodeAdd: true })}> REGISTRO PELA CÂMERA  </ ButtonContained>
-          </>
+            <View style={styles.selectorGroup}>
+                <View style={styles.selectorSubGroup}>
+                    <ButtonContained style={styles.selectorButton} onPress={() => this.setState({ manualAdd: true, barcodeAdd: false })}> REGISTRO MANUAL  </ ButtonContained>
+                    <ButtonContained style={styles.selectorButton} onPress={() => this.setState({ manualAdd: false, barcodeAdd: true })}> REGISTRO PELA CÂMERA  </ ButtonContained>
+                </View >
+            </View>
           );
               
       }
@@ -150,6 +152,22 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: "center"
+    },
+    selectorButton: {
+        display: "flex",
+        flexWrap: "wrap",
+        width: "45%",
+        borderColor: "#a10013",
+        borderWidth: 2,
+        marginLeft: 10,
+        marginRight: 10
+    },
+    selectorGroup: {
+        display: "flex",
+    },
+    selectorSubGroup: {
+        display: "flex",
+        flexDirection: "row"
     }
   });
   

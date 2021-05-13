@@ -1,10 +1,13 @@
 import createReducers from '../../../store/createPageReducer';
-import {searchShoppingListsRequest} from './searchShoppingListsRequest';
-import {createShoppingListsRequest} from './createShoppingListsRequest';
-import {deleteShoppingListsRequest} from './deleteShoppingListsRequest';
-import {searchShoppingListProductsRequest} from "./searchShoppingListProductsRequest";
-import {addProductToShoppingListRequest} from './addProductToShoppingListRequest';
-import {deleteProductFromShoppingListRequest} from './deleteProductFromShoppingListRequest';
+// import {searchShoppingListsRequest} from './searchShoppingListsRequest';
+// import {createShoppingListsRequest} from './createShoppingListsRequest';
+// import {deleteShoppingListsRequest} from './deleteShoppingListsRequest';
+// import {searchShoppingListProductsRequest} from "./searchShoppingListProductsRequest";
+// import {addProductToShoppingListRequest} from './addProductToShoppingListRequest';
+// import {deleteProductFromShoppingListRequest} from './deleteProductFromShoppingListRequest';
+import {put, call} from 'redux-saga/effects';
+
+import {api} from '../../../services';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -145,5 +148,71 @@ const {Creators, reducers, sagas} = createReducers(
     shoppingListProducts: []
   },
 );
+
+function* addProductToShoppingListRequest({id, barcode, quantity}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    yield call(api.addProductToShoppingList, id, {barcode: barcode, quantity: quantity});
+    yield put(Creators.searchShoppingListProductsRequest(id));
+    yield put(Creators.addProductToShoppingListSuccess());
+  } catch (response) {
+    yield put(Creators.addProductToShoppingListFailure());
+  }
+}
+
+function* createShoppingListsRequest({name}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    yield call(api.createShoppingList, {name: name});
+    yield put(Creators.searchShoppingListsRequest());
+    yield put(Creators.addProductToShoppingListSuccess());
+  } catch (response) {
+    yield put(Creators.createShoppingListsFailure());
+  }
+}
+
+function* deleteProductFromShoppingListRequest({id, barcode}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    yield call(api.deleteProductFromShoppingList, id, barcode);
+    yield put(ShoppingCartCreators.clearShoppingCart());
+    yield put(Creators.searchShoppingListProductsRequest(id));
+    yield put(Creators.deleteProductFromShoppingListSuccess());
+  } catch (response) {
+    yield put(Creators.deleteProductFromShoppingListFailure());
+  }
+}
+
+function* deleteShoppingListsRequest({id}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    yield call(api.deleteShoppingList, id);
+    yield put(ShoppingCartCreators.clearShoppingCart());
+    yield put(Creators.searchShoppingListsRequest());
+    yield put(Creators.deleteShoppingListsSuccess());
+  } catch (response) {
+    yield put(Creators.deleteShoppingListsFailure());
+  }
+}
+
+function* searchShoppingListProductsRequest({id}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    const response = yield call(api.searchShoppingListProducts, id);
+    yield put(Creators.searchShoppingListProductsSuccess(response.data));
+  } catch (response) {
+    yield put(Creators.searchShoppingListProductsFailure());
+  }
+}
+
+function* searchShoppingListsRequest() {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    const response = yield call(api.searchShoppingList);
+    yield put(Creators.searchShoppingListsSuccess(response.data));
+  } catch (response) {
+    yield put(Creators.searchShoppingListsFailure());
+  }
+}
 
 export {Creators, reducers, sagas};

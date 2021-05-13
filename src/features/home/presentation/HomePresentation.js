@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ButtonContained } from '../../../components';
+import { ButtonContained, Typography } from '../../../components';
 import { Navigation } from "../../../navigation";
-import {api} from '../../../services';
+import {Theme} from '../../../config';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class HomePresentation extends Component {
 
@@ -12,18 +13,74 @@ class HomePresentation extends Component {
         <>
         <View style={styles.homeGroup}>
             <View style={styles.homeSubGroup} >
-                <ButtonContained icon="basket" style={styles.homeButton} onPress={Navigation.toShoppingList}> LISTAS DE COMPRAS </ButtonContained>
-                <ButtonContained icon="registered-trademark" style={styles.homeButton} onPress={Navigation.toRegisterProduct}> REGISTRAR PRODUTO </ButtonContained>
+                <ButtonContained style={styles.homeButton} onPress={Navigation.toShoppingList}>
+                    <MaterialCommunityIcons
+                        style={styles.homeButtonChildren}
+                        color={Theme.light.colors.buttonText}
+                        name={"basket"}
+                        size={70}
+                    />
+                     {/* <Typography style={styles.homeButtonChildren} >LISTAS DE COMPRAS</Typography> */}
+                </ButtonContained>
+                <ButtonContained style={styles.homeButton} onPress={Navigation.toRegisterProduct}>
+                    <MaterialCommunityIcons
+                        style={styles.homeButtonChildren}
+                        color={Theme.light.colors.buttonText}
+                        name={"registered-trademark"}
+                        size={70}
+                    />
+                     {/* <Typography style={styles.homeButtonChildren} >REGISTRAR PRODUTO</Typography> */}
+                </ButtonContained>
             </View>
             <View style={styles.homeSubGroup} >
-                <ButtonContained icon="magnify" style={styles.homeButton} onPress={Navigation.toSearchProduct}> PESQUISAR PRODUTO </ButtonContained>
-                <ButtonContained icon="cart-outline" style={styles.homeButton} onPress={Navigation.toShoppingCart}> CARRINHO DE COMPRAS </ButtonContained>
+                <ButtonContained style={styles.homeButton} onPress={Navigation.toSearchProduct}>
+                    <MaterialCommunityIcons
+                        style={styles.homeButtonChildren}
+                        color={Theme.light.colors.buttonText}
+                        name={"magnify"}
+                        size={70}
+                    />
+                     {/* <Typography style={styles.homeButtonChildren} >PESQUISAR PRODUTO</Typography> */}
+                </ButtonContained>
+                <ButtonContained style={styles.homeButton} onPress={Navigation.toShoppingCart}>
+                    <MaterialCommunityIcons
+                        style={styles.homeButtonChildren}
+                        color={Theme.light.colors.buttonText}
+                        name={"cart-outline"}
+                        size={70}
+                    />
+                     {/* <Typography style={styles.homeButtonChildren} >CARRINHO DE COMPRAS</Typography> */}
+                </ButtonContained>
             </View>
             <View style={styles.homeSubGroup} >
-                <ButtonContained disabled={true} style={styles.homeButton} > EDIÇÃO DE PERFIL - EM BREVE </ButtonContained>
-                <ButtonContained disabled={true} style={styles.homeButton} > CONFIGURAÇÕES - EM BREVE </ButtonContained>
+                <ButtonContained disabled={true} style={styles.homeButton} > 
+                    <MaterialCommunityIcons
+                        style={styles.homeButtonChildren}
+                        color={Theme.light.colors.buttonText}
+                        name={"account-hard-hat"}
+                        size={70}
+                    />
+                    {/* <Typography style={styles.homeButtonChildren} >EDIÇÃO DE PERFIL - EM BREVE</Typography> */}
+                </ButtonContained>
+                <ButtonContained disabled={true} style={styles.homeButton} >
+                    <MaterialCommunityIcons
+                        style={styles.homeButtonChildren}
+                        color={Theme.light.colors.buttonText}
+                        name={"account-hard-hat"}
+                        size={70}
+                    />
+                    {/* <Typography style={styles.homeButtonChildren} >CONFIGURAÇÕES - EM BREVE</Typography> */}
+                </ButtonContained>
             </View>
-            <ButtonContained style={styles.exitButton} onPress={globalLogout} > SAIR </ButtonContained>
+            <ButtonContained style={styles.exitButton} onPress={globalLogout} >
+                    <MaterialCommunityIcons
+                        style={styles.homeButtonChildren}
+                        color={Theme.light.colors.buttonText}
+                        name={"exit-run"}
+                        size={70}
+                    />
+                 {/* <Typography style={styles.homeButtonChildren} >SAIR</Typography> */}
+                 </ButtonContained>
         </View>
         </>
         )
@@ -35,10 +92,13 @@ const styles = StyleSheet.create({
     homeButton: {
       display: "flex",
       flexWrap: "wrap",
-        width: "50%",
-        height: 150,
-        borderColor: "#a10013",
-        borderWidth: 2
+      width: "50%",
+      height: 150,
+      borderColor: "#a10013",
+      borderWidth: 2
+    },
+    homeButtonChildren: {
+        alignContent: "center"
     },
     exitButton: {
       display: "flex",

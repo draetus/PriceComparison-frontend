@@ -71,6 +71,7 @@ Selector = () => {
         <this.ProductList />
 
         <ButtonContained 
+        style={styles.deleteButton}
             onPress={() => {
                 deleteShoppingListsRequest({id});
                 goBack();
@@ -92,6 +93,14 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center"
+  },
+  deleteButton: {
+    display: "flex",
+    flexWrap: "wrap",
+    borderColor: "#a10013",
+    borderWidth: 2,
+    marginLeft: 50,
+    marginRight: 50
   }
 });
   

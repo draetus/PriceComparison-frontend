@@ -1,5 +1,6 @@
 import createReducers from '../../../store/createPageReducer';
-import {updateShoppingCartRequest} from "./updateShoppingCartRequest";
+// import {updateShoppingCartRequest} from "./updateShoppingCartRequest";
+import {put, call} from 'redux-saga/effects';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -33,5 +34,11 @@ const {Creators, reducers, sagas} = createReducers(
     isFetching: false,
   },
 );
+
+function* updateShoppingCartRequest({products}) {
+  console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+  yield put(Creators.updateShoppingCartSuccess());
+}
+
 
 export {Creators, reducers, sagas};

@@ -1,8 +1,16 @@
 import createReducers from '../../store/createPageReducer';
-import {openRegisterProductModalRequest} from './openRegisterProductModalRequest';
-import {openSearchProductModalRequest} from './openSearchProductModalRequest';
-import {openAddProductToShoppingListModalRequest} from './openAddProductToShoppingListModalRequest';
-import {openAddProductToShoppingCartModalRequest} from './openAddProductToShoppingCartModalRequest';
+// import {openRegisterProductModalRequest} from './openRegisterProductModalRequest';
+// import {openSearchProductModalRequest} from './openSearchProductModalRequest';
+// import {openAddProductToShoppingListModalRequest} from './openAddProductToShoppingListModalRequest';
+// import {openAddProductToShoppingCartModalRequest} from './openAddProductToShoppingCartModalRequest';
+import {put, call} from 'redux-saga/effects';
+
+import {api} from '../../services';
+
+import { addProductToShoppingCartModal } from '../../modals/utils';
+import { addProductToShoppingListModal } from '../../modals/utils';
+import { registerModal } from '../../modals/utils';
+import { searchModal } from '../../modals/utils';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -94,5 +102,60 @@ const {Creators, reducers, sagas} = createReducers(
     isFetchingAddProductToShoppingCartModal: false,
   },
 );
+
+function* openAddProductToShoppingCartModalRequest({barcode, lat, lon, shoppingListId, shoppingListProducts, shoppingCartProducts}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    const response = yield call(api.checkIfExists, barcode);
+    let productName = null;
+    if (response.data.exists) {
+      const productData = yield call(api.searchProduct, barcode, lat, lon);
+      productName = productData.data.name;
+    }
+    
+    addProductToShoppingCartModal.setInfos(barcode, response.data.exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts);
+    yield put(Creators.openAddProductToShoppingCartModalSuccess());
+  } catch (response) {
+    yield put(Creators.openAddProductToShoppingCartModalFailure());
+  }
+}
+
+function* openAddProductToShoppingListModalRequest({barcode, id}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    const response = yield call(api.checkIfExists, barcode);
+
+    addProductToShoppingListModal.setInfos(barcode, response.data.exists, id);
+    yield put(Creators.openAddProductToShoppingListModalSuccess());
+  } catch (response) {
+    yield put(Creators.openAddProductToShoppingListModalFailure());
+  }
+}
+
+function* openRegisterProductModalRequest({barcode}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    const response = yield call(api.checkIfExists, barcode);
+
+    registerModal.setInfos(barcode, response.data.exists);
+    yield put(Creators.openRegisterProductModalSuccess());
+  } catch (response) {
+    yield put(Creators.openRegisterProductModalFailure());
+  }
+}
+
+function* openSearchProductModalRequest({barcode, lat, lon}) {
+  try {
+    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    console.log("SAGA: ", {barcode, lat, lon});
+    const response = yield call(api.searchProduct, barcode, lat, lon);
+    console.log("SAGA RESPONSE: ", response);
+
+    searchModal.setInfos(response.data.barcode, response.data.name);
+    yield put(Creators.openSearchProductModalSuccess());
+  } catch (response) {
+    yield put(Creators.openSearchProductModalFailure());
+  }
+}
 
 export {Creators, reducers, sagas};

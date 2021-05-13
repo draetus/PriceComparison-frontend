@@ -4,7 +4,7 @@ import {Creators} from '.';
 
 import {api} from '../../../services';
 
-export function* addProductToShoppingListRequest({name}) {
+export function* createShoppingListsRequest({name}) {
   try {
     console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     yield call(api.createShoppingList, {name: name});

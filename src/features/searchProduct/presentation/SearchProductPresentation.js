@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
 import GetLocation from 'react-native-get-location';
 import { ButtonContained, Input, Typography } from '../../../components';
 import { FormHolder } from '../../../FormConfig';
@@ -32,12 +33,23 @@ class SearchProductPresentation extends Component {
 
             <Input name="barcode" inputLabel="CÓDIGO DE BARRAS" />
 
-            <ButtonContained type="submit"> PESQUISAR </ButtonContained>
+            <ButtonContained style={styles.submitButton} type="submit"> PESQUISAR </ButtonContained>
         </FormHolder>
         </>
         )
     }
 
 }
+
+const styles = StyleSheet.create({
+    submitButton: {
+        display: "flex",
+        flexWrap: "wrap",
+        borderColor: "#a10013",
+        borderWidth: 2,
+        marginLeft: 50,
+        marginRight: 50
+    }
+  });
 
 export default SearchProductPresentation;

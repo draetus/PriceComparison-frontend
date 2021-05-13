@@ -107,7 +107,7 @@ class AddProductToShoppingCartModal extends React.Component {
 
                 <Input name="price" inputLabel="PREÇO" required={true}/>
 
-                <ButtonContained type="submit"> ADICIONAR PRODUTO </ButtonContained>
+                <ButtonContained style={styles.selectorButton} type="submit"> ADICIONAR PRODUTO </ButtonContained>
               </FormHolder>
           </>
           : 
@@ -152,7 +152,7 @@ class AddProductToShoppingCartModal extends React.Component {
 
                 <Input name="price" inputLabel="PREÇO" required={true}/>
 
-                <ButtonContained type="submit"> ADICIONAR PRODUTO </ButtonContained>
+                <ButtonContained style={styles.selectorButton} type="submit"> ADICIONAR PRODUTO </ButtonContained>
 
             </FormHolder>
           </>
@@ -177,7 +177,7 @@ class AddProductToShoppingCartModal extends React.Component {
           }}>
             <Input name="name" inputLabel="NOME DO PRODUTO" />
 
-            <ButtonContained type="submit"> ENVIAR </ButtonContained>
+            <ButtonContained style={styles.selectorButton} type="submit"> ENVIAR </ButtonContained>
 
         </FormHolder>
       </>
@@ -255,5 +255,13 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
+  },
+  selectorButton: {
+    display: "flex",
+    flexWrap: "wrap",
+    borderColor: "#a10013",
+    borderWidth: 2,
+    marginLeft: 50,
+    marginRight: 50
   },
 });

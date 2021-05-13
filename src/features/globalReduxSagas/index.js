@@ -1,5 +1,7 @@
 import createReducers from '../../store/createPageReducer';
-import {logoutFunction} from './logoutFunction';
+// import {logoutFunction} from './logoutFunction';
+import {call} from 'redux-saga/effects';
+import {LocalStorage} from '../../lib';
 
 const {Creators, reducers, sagas} = createReducers(
   [
@@ -13,7 +15,7 @@ const {Creators, reducers, sagas} = createReducers(
         ...state,
         isLoggedIn: false,
       }),
-      sagaFunction: logoutFunction,
+      sagaFunction: logoutRequest,
     },
     {
       name: 'setUserInfos',
@@ -28,5 +30,11 @@ const {Creators, reducers, sagas} = createReducers(
     userInfos: null,
   },
 );
+
+function* logoutRequest() {
+  yield call(LocalStorage.removeItem, 'token');
+  yield call(LocalStorage.removeItem, 'password');
+}
+
 
 export {Creators, reducers, sagas};
