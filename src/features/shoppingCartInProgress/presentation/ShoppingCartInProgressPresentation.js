@@ -23,7 +23,7 @@ class ShoppingCartInProgressPresentation extends Component {
 
     Selector = () => {
         const {manualAdd, barcodeAdd} = this.state;
-        const {id, products, shoppingListProducts, openAddProductToShoppingCartModalRequest} = this.props;
+        const {id, products, shoppingListProducts, noShoppingList, openAddProductToShoppingCartModalRequest} = this.props;
       
           if (manualAdd) {
               return (
@@ -32,6 +32,7 @@ class ShoppingCartInProgressPresentation extends Component {
                       id={id}
                       products={products}
                       shoppingListProducts={shoppingListProducts}
+                      noShoppingList={noShoppingList}
                       clear = {() => this.clear()}
                   />
               )
@@ -44,6 +45,7 @@ class ShoppingCartInProgressPresentation extends Component {
                       id={id}
                       products={products}
                       shoppingListProducts={shoppingListProducts}
+                      noShoppingList={noShoppingList}
                       clear = {() => this.clear()}
                   />
               )
@@ -61,23 +63,13 @@ class ShoppingCartInProgressPresentation extends Component {
               
       }
 
-    ProductList = () => {
-        const {shoppingListProducts = []} = this.props;
-
-            return (
-                <>
-                <Typography>LISTA DE COMPRAS</Typography>
-                {shoppingListProducts.map((item, index) => (
-                    <Typography key = {item.barcode} >
-                         {item.name} 
-                    </Typography>
-                ))}
-                </>
-            )
-        }
-
     ShoppingCartList = () => {
-        const {shoppingListProducts = [], products = []} = this.props;
+        let {shoppingListProducts = []} = this.props;
+        const {noShoppingList, products = []} = this.props;
+
+        if (noShoppingList) {
+            shoppingListProducts = products;
+        }
 
         return (
             <ScrollView style={styles.productList}>
@@ -121,7 +113,7 @@ class ShoppingCartInProgressPresentation extends Component {
 
     render() {
 
-        const { name, clearShoppingCart } = this.props;
+        const { name, clearShoppingCart, noShoppingList } = this.props;
         const {manualAdd, barcodeAdd} = this.state;
 
         if (manualAdd || barcodeAdd) {
@@ -133,6 +125,7 @@ class ShoppingCartInProgressPresentation extends Component {
         <Card.Title titleStyle={styles.title} title={name}/>
         <this.ShoppingCartList />
         <this.Selector />
+        <ButtonContained style={styles.selectorLargeButton} onPress={clearShoppingCart}> LIMPAR CARRINHO DE COMPRAS </ButtonContained>
         </>
         )
     }
@@ -157,6 +150,14 @@ const styles = StyleSheet.create({
         display: "flex",
         flexWrap: "wrap",
         width: "45%",
+        borderColor: "#a10013",
+        borderWidth: 2,
+        marginLeft: 10,
+        marginRight: 10
+    },
+    selectorLargeButton: {
+        display: "flex",
+        flexWrap: "wrap",
         borderColor: "#a10013",
         borderWidth: 2,
         marginLeft: 10,

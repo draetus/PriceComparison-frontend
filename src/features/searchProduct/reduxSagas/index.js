@@ -69,7 +69,7 @@ const {Creators, reducers, sagas} = createReducers(
 
 function* searchProductsRequest({name}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     const response = yield call(api.searchProducts, name);
     yield put(Creators.searchProductsSuccess(response.data));
   } catch (response) {
@@ -79,7 +79,7 @@ function* searchProductsRequest({name}) {
 
 function* searchSingleProductRequest({barcode, lat, lon}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     const response = yield call(api.searchProduct, barcode, lat, lon);
     yield put(Creators.searchSingleProductSuccess(response.data));
   } catch (response) {

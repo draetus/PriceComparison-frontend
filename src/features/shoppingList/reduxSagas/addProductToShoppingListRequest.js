@@ -6,7 +6,7 @@ import {api} from '../../../services';
 
 export function* addProductToShoppingListRequest({id, barcode, quantity}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     yield call(api.addProductToShoppingList, id, {barcode: barcode, quantity: quantity});
     yield put(Creators.searchShoppingListProductsRequest(id));
     yield put(Creators.addProductToShoppingListSuccess());

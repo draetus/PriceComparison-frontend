@@ -12,7 +12,7 @@ class ManualRegister extends Component {
         <Typography> ADICINAR AO CARRINHO DE COMPRAS </Typography>
         <FormHolder
             onSubmit={(data) => {
-                const { openAddProductToShoppingCartModalRequest, clear, id, products, shoppingListProducts } = this.props;
+                const { openAddProductToShoppingCartModalRequest, clear, id, products, shoppingListProducts, noShoppingList } = this.props;
                 GetLocation.getCurrentPosition({
                     enableHighAccuracy: true,
                     timeout: 15000,

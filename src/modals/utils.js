@@ -59,8 +59,8 @@ function closeAddProductToShoppingListModalModal() {
 function setAddProductToShoppingCartModalRef(ref) {
   addProductToShoppingCartModalRef = ref;
 }
-function setAddProductToShoppingCartModalInfos(barcode, exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts) {
-  addProductToShoppingCartModalRef.setInfos({barcode, exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts }, true);
+function setAddProductToShoppingCartModalInfos(barcode, exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts, noShoppingList) {
+  addProductToShoppingCartModalRef.setInfos({barcode, exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts, noShoppingList }, true);
 }
 function closeAddProductToShoppingCartModal() {
   addProductToShoppingCartModalRef.closeModal();

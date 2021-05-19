@@ -50,7 +50,6 @@ const {Creators, reducers, sagas} = createReducers(
 
 function* savePriceProductRequest({price, barcode, latitude, longitude}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     yield call(api.savePriceProduct, {price, barcode, latitude, longitude});
     yield put(Creators.savePriceProductSuccess());
   } catch (response) {
@@ -60,7 +59,6 @@ function* savePriceProductRequest({price, barcode, latitude, longitude}) {
 
 function* saveProductRequest({name, barcode}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     yield call(api.saveProduct, {name, barcode});
     yield put(Creators.saveProductSuccess());
   } catch (response) {

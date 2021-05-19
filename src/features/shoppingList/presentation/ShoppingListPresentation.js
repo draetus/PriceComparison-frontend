@@ -24,8 +24,6 @@ class ShoppingListPresentation extends Component {
     render() {
         return (
         <>
-            <Typography> MINHAS LISTAS DE COMPRAS </Typography>
-
             <this.ShoppingList />
 
             <ButtonContained 

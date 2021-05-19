@@ -32,7 +32,7 @@ class ShoppingCartPresentation extends Component {
         <ButtonContained 
         style={styles.productButton}
         onPress={() => {
-          Navigation.toShoppingCartInProgress(null);
+          Navigation.toShoppingCartInProgress({noShoppingList: true});
         }}
         > SEGUIR SEM LISTA </ButtonContained>
       </>

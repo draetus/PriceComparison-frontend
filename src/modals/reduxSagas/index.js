@@ -76,7 +76,7 @@ const {Creators, reducers, sagas} = createReducers(
     },
     {
       name: 'openAddProductToShoppingCartModalRequest',
-      params: ['barcode', 'lat', 'lon', 'shoppingListId', 'shoppingListProducts', 'shoppingCartProducts'],
+      params: ['barcode', 'lat', 'lon', 'shoppingListId', 'shoppingListProducts', 'shoppingCartProducts', 'noShoppingList'],
       function: (state) => ({...state, isFetchingAddProductToShoppingCartModal: true}),
       sagaFunction: openAddProductToShoppingCartModalRequest,
     },
@@ -103,9 +103,9 @@ const {Creators, reducers, sagas} = createReducers(
   },
 );
 
-function* openAddProductToShoppingCartModalRequest({barcode, lat, lon, shoppingListId, shoppingListProducts, shoppingCartProducts}) {
+function* openAddProductToShoppingCartModalRequest({barcode, lat, lon, shoppingListId, shoppingListProducts, shoppingCartProducts, noShoppingList}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     const response = yield call(api.checkIfExists, barcode);
     let productName = null;
     if (response.data.exists) {
@@ -113,7 +113,7 @@ function* openAddProductToShoppingCartModalRequest({barcode, lat, lon, shoppingL
       productName = productData.data.name;
     }
     
-    addProductToShoppingCartModal.setInfos(barcode, response.data.exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts);
+    addProductToShoppingCartModal.setInfos(barcode, response.data.exists, productName, shoppingListId, shoppingListProducts, shoppingCartProducts, noShoppingList);
     yield put(Creators.openAddProductToShoppingCartModalSuccess());
   } catch (response) {
     yield put(Creators.openAddProductToShoppingCartModalFailure());
@@ -122,7 +122,7 @@ function* openAddProductToShoppingCartModalRequest({barcode, lat, lon, shoppingL
 
 function* openAddProductToShoppingListModalRequest({barcode, id}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     const response = yield call(api.checkIfExists, barcode);
 
     addProductToShoppingListModal.setInfos(barcode, response.data.exists, id);
@@ -134,7 +134,7 @@ function* openAddProductToShoppingListModalRequest({barcode, id}) {
 
 function* openRegisterProductModalRequest({barcode}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     const response = yield call(api.checkIfExists, barcode);
 
     registerModal.setInfos(barcode, response.data.exists);
@@ -146,10 +146,8 @@ function* openRegisterProductModalRequest({barcode}) {
 
 function* openSearchProductModalRequest({barcode, lat, lon}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
-    console.log("SAGA: ", {barcode, lat, lon});
+    
     const response = yield call(api.searchProduct, barcode, lat, lon);
-    console.log("SAGA RESPONSE: ", response);
 
     searchModal.setInfos(response.data.barcode, response.data.name);
     yield put(Creators.openSearchProductModalSuccess());

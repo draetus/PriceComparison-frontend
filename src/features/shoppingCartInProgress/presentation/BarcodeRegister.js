@@ -5,7 +5,7 @@ import { BarcodeScanner } from '../../../components';
 class BarcodeRegister extends Component {
 
     onBarCodeRead = (barcode) => {
-        const { openAddProductToShoppingCartModalRequest, clear, id, products, shoppingListProducts } = this.props;
+        const { openAddProductToShoppingCartModalRequest, clear, id, products, shoppingListProducts, noShoppingList } = this.props;
         GetLocation.getCurrentPosition({
             enableHighAccuracy: true,
             timeout: 15000,

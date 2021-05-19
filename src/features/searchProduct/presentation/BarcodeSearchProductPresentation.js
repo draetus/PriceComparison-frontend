@@ -11,7 +11,6 @@ class SearchProductPresentation extends Component {
             timeout: 15000,
           })
           .then(location => {
-              console.log("BARCODE SERACH PRODUCT PRESENTATION LOCATION: ", location);
             openSearchProductModalRequest({
                 lat: location.latitude,
                 lon: location.longitude,
@@ -19,7 +18,6 @@ class SearchProductPresentation extends Component {
             });
           })
           .catch(error => {
-            console.log("BARCODE SERACH PRODUCT PRESENTATION LOCATION FAIL: ");
               const { code, message } = error;
               console.warn(code, message);
           })

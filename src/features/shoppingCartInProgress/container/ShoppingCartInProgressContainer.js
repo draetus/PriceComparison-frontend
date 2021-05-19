@@ -14,15 +14,14 @@ class ShoppingCartInProgressContainer extends Component {
 
   render() {
 
-    const { id, name, shoppingListProducts, products, updateShoppingCart, clearShoppingCart, openAddProductToShoppingCartModalRequest } = this.props;
-
-    console.log("SHOPPING CART CONTAINER: ", products);
+    const { id, name, shoppingListProducts, products, noShoppingList, updateShoppingCart, clearShoppingCart, openAddProductToShoppingCartModalRequest } = this.props;
 
     return (
       <ShoppingCartInProgressPresentation
       id={id}
       name={name}
       shoppingListProducts={shoppingListProducts}
+      noShoppingList={noShoppingList}
       products={products}
       updateShoppingCart={updateShoppingCart}
       clearShoppingCart={clearShoppingCart}

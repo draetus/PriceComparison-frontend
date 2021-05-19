@@ -6,6 +6,7 @@ import createReducers from '../../../store/createPageReducer';
 // import {addProductToShoppingListRequest} from './addProductToShoppingListRequest';
 // import {deleteProductFromShoppingListRequest} from './deleteProductFromShoppingListRequest';
 import {put, call} from 'redux-saga/effects';
+import {Creators as ShoppingCartCreators} from "../../shoppingCartInProgress/reduxSagas";
 
 import {api} from '../../../services';
 
@@ -151,7 +152,7 @@ const {Creators, reducers, sagas} = createReducers(
 
 function* addProductToShoppingListRequest({id, barcode, quantity}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     yield call(api.addProductToShoppingList, id, {barcode: barcode, quantity: quantity});
     yield put(Creators.searchShoppingListProductsRequest(id));
     yield put(Creators.addProductToShoppingListSuccess());
@@ -162,10 +163,10 @@ function* addProductToShoppingListRequest({id, barcode, quantity}) {
 
 function* createShoppingListsRequest({name}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     yield call(api.createShoppingList, {name: name});
     yield put(Creators.searchShoppingListsRequest());
-    yield put(Creators.addProductToShoppingListSuccess());
+    yield put(Creators.createShoppingListsSuccess());
   } catch (response) {
     yield put(Creators.createShoppingListsFailure());
   }
@@ -173,7 +174,7 @@ function* createShoppingListsRequest({name}) {
 
 function* deleteProductFromShoppingListRequest({id, barcode}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     yield call(api.deleteProductFromShoppingList, id, barcode);
     yield put(ShoppingCartCreators.clearShoppingCart());
     yield put(Creators.searchShoppingListProductsRequest(id));
@@ -185,7 +186,7 @@ function* deleteProductFromShoppingListRequest({id, barcode}) {
 
 function* deleteShoppingListsRequest({id}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     yield call(api.deleteShoppingList, id);
     yield put(ShoppingCartCreators.clearShoppingCart());
     yield put(Creators.searchShoppingListsRequest());
@@ -197,7 +198,6 @@ function* deleteShoppingListsRequest({id}) {
 
 function* searchShoppingListProductsRequest({id}) {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
     const response = yield call(api.searchShoppingListProducts, id);
     yield put(Creators.searchShoppingListProductsSuccess(response.data));
   } catch (response) {
@@ -207,7 +207,7 @@ function* searchShoppingListProductsRequest({id}) {
 
 function* searchShoppingListsRequest() {
   try {
-    console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+    
     const response = yield call(api.searchShoppingList);
     yield put(Creators.searchShoppingListsSuccess(response.data));
   } catch (response) {

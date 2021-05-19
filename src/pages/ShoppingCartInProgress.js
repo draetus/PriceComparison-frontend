@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Typography } from '../components';
 import { ShoppingCartInProgressContainer } from '../features';
 
 class ShoppingCartInProgress extends Component {
 
     render() {
-        const {id = null, name = null} = this.props.route.params;
+        const {id = null, name = null, noShoppingList=false} = this.props.route.params;
         return (
             <ShoppingCartInProgressContainer 
             id={id}
             name={name}
+            noShoppingList={noShoppingList}
             />
         )
     }

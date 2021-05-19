@@ -36,7 +36,7 @@ const {Creators, reducers, sagas} = createReducers(
 );
 
 function* updateShoppingCartRequest({products}) {
-  console.log("SAGA MESSAGE");console.log("SAGA MESSAGE");
+  
   yield put(Creators.updateShoppingCartSuccess());
 }
 

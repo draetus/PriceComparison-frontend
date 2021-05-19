@@ -60,6 +60,7 @@ class RegisterShoppingListModal extends React.Component {
 
   render() {
     const {isFetching} = this.props;
+    console.log("REGISTER SHOPPING LIST MODAL: ", {isFetching});
     return (
       isFetching ? 
       (

@@ -16,12 +16,21 @@ class BarcodeScanner extends Component {
         super(props);
         this.handleTourch = this.handleTourch.bind(this);
         this.state = {
-            torchOn: false
+            torchOn: false,
+            barcodeData: null
         }
     }
 
+    clearData() {
+        this.setState({
+            barcodeData: null
+        })
+    }
+
     onBarCodeRead = (e) => {
-        const {onBarCodeRead, searchSingleProductRequest} = this.props;
+        const {searchSingleProductRequest} = this.props;
+
+        console.log("BARCODEREAD: ", e);
 
         GetLocation.getCurrentPosition({
             enableHighAccuracy: true,
@@ -33,20 +42,23 @@ class BarcodeScanner extends Component {
                 lat: location.latitude, 
                 lon: location.longitude
             }); 
-            console.log("ENVIOU LOCALIZAÇÃO");
           })
           .catch(error => {
               const { code, message } = error;
               console.warn(code, message);
           })
 
-        // onBarCodeRead(e.data);
+        this.setState({
+            barcodeData: e.data
+        });
     }
 
     render() {
         const {singleProduct, clearSingleProduct, onBarCodeRead} = this.props;
+        const {barcodeData} = this.state;
 
-        console.log("RENDER: ", singleProduct);
+        console.log("BARCODE RENDER: ", singleProduct);
+
         return (
             <View style={styles.container}>
                 <RNCamera
@@ -61,20 +73,49 @@ class BarcodeScanner extends Component {
                         singleProduct != null ?
                         (
                         <>
-                        <Text style={styles.bestPrice}> {"R$ " + singleProduct.bestPrice.price} </Text>
-                        <Text style={styles.bestPrice}> { + singleProduct.bestPrice.distance + " Metros"} </Text>
-                        <Text style={styles.bestPriceNear}> {"R$ " +singleProduct.bestPriceNear.price} </Text>
-                        <Text style={styles.bestPriceNear}> {singleProduct.bestPriceNear.distance + " Metros"} </Text>
-                        <Text style={styles.averagePrice}> {"R$ " + singleProduct.averagePrice} </Text>
-                        {onBarCodeRead 
-                        ? (<ButtonContained onPress={() => {onBarCodeRead(singleProduct.barcode);}}> CONCLUIR </ButtonContained>)
-                        : <></>
-                        }
-                        <ButtonContained onPress={clearSingleProduct}> LIMPAR </ButtonContained>
+                        <View style={styles.cameraComponentContainer} >
+                            <View>
+                                {singleProduct.bestPrice?.price ? <Text style={styles.bestPrice}> {"R$ " + singleProduct.bestPrice?.price} </Text> : <></>}
+                                {singleProduct.bestPrice?.distance ? <Text style={styles.bestPrice}> { + singleProduct.bestPrice?.distance.toFixed(2) + " KM"} </Text> : <></>}
+                            </View>
+                            <View style={styles.rightPriceContainer}>
+                                {singleProduct.bestPriceNear?.price ? <Text style={styles.bestPriceNear}> {"R$ " +singleProduct.bestPriceNear?.price} </Text> : <></>}
+                                {singleProduct.bestPriceNear?.distance ? <Text style={styles.bestPriceNear}> {singleProduct.bestPriceNear?.distance.toFixed(2) + " KM"} </Text> : <></>}
+                            </View>
+                        </View>
+                        <View>
+                            {singleProduct.averagePrice ? <Text style={styles.averagePrice}> {"R$ " + singleProduct.averagePrice.toFixed(2)} </Text> : <></>}
+                        </View>
                         <Text style={styles.barcodeScannerText}> {singleProduct.name} </Text>
+                        <View style={styles.cameraComponentContainer}>
+                            {onBarCodeRead 
+                            ? (<ButtonContained style={styles.barcodeButton} onPress={() => {onBarCodeRead(barcodeData);}}> CONCLUIR </ButtonContained>)
+                            : <></>
+                            }
+                            <ButtonContained style = {styles.barcodeButton} onPress={() => {
+                                clearSingleProduct();
+                                this.clearData();
+                                }}> LIMPAR </ButtonContained>
+                        </View>
                         </>
                         )
-                        : <Text style={styles.barcodeScannerText}> APONTE PARA UM CÓDIGO DE BARRAS </Text>
+                        : 
+                            barcodeData 
+                                ? 
+                                (
+                                    <View style={styles.cameraComponentContainer}>
+                                        {onBarCodeRead 
+                                        ? (<ButtonContained style={styles.barcodeButton} onPress={() => {onBarCodeRead(barcodeData);}}> CONCLUIR </ButtonContained>)
+                                        : <></>
+                                        }
+                                        <ButtonContained style = {styles.barcodeButton} onPress={() => {
+                                            clearSingleProduct();
+                                            this.clearData();
+                                            }}> LIMPAR </ButtonContained>
+                                    </View>
+                                ) 
+                                :
+                                <Text style={styles.barcodeScannerText}> APONTE PARA UM CÓDIGO DE BARRAS </Text>
                     }
                     
                     
@@ -102,6 +143,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
+        paddingHorizontal: 10
     },
     preview: {
         flex: 1,
@@ -130,7 +172,20 @@ const styles = StyleSheet.create({
         backgroundColor: "#008000"
     },
     bestPriceNear: {
-        backgroundColor: "#ffff00"
+        backgroundColor: "#ffff00",
+        textAlign: "right"
+    },
+    rightPriceContainer: {
+        textAlign: "right"
+    },
+    barcodeButton: {
+
+    },
+    cameraComponentContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%"
     }
 });
 

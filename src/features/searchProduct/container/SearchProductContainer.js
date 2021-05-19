@@ -27,7 +27,6 @@ function mapDispatchToProps(dispatch) {
     const { openSearchProductModalRequest } = CustomModalCreators;
     return {
       openSearchProductModalRequest: function ({barcode, lat, lon}) {
-        console.log("DISPATCH: ", {barcode, lat, lon});
         return dispatch(openSearchProductModalRequest(barcode, lat, lon));
       }
     };

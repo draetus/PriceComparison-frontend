@@ -41,7 +41,8 @@ class AddProductToShoppingCartModal extends React.Component {
 
   AddProductToShoppingCartForm = () => {
     const {updateShoppingCart, addProductToShoppingListRequest, savePriceProductRequest} = this.props;
-    const {barcode, productName, shoppingListId, shoppingCartProducts = [], shoppingListProducts = []} = this.state.infos;
+    const {barcode, productName, shoppingListId, shoppingCartProducts = [], shoppingListProducts = [], noShoppingList=false} = this.state.infos;
+
     let existsInShoppingListProducts = false;
     let existsInShoppingCartProducts = false;
 
@@ -79,7 +80,7 @@ class AddProductToShoppingCartModal extends React.Component {
                   updateShoppingCart({
                     products: shoppingCartProducts
                   });
-                  if (!existsInShoppingListProducts) {
+                  if (!existsInShoppingListProducts && !noShoppingList) {
                     addProductToShoppingListRequest({
                       id: shoppingListId,
                       barcode: barcode
@@ -124,7 +125,7 @@ class AddProductToShoppingCartModal extends React.Component {
                   updateShoppingCart({
                     products: shoppingCartProducts
                   });
-                  if (!existsInShoppingListProducts) {
+                  if (!existsInShoppingListProducts && !noShoppingList) {
                     addProductToShoppingListRequest({
                       id: shoppingListId,
                       barcode: barcode
@@ -186,6 +187,8 @@ class AddProductToShoppingCartModal extends React.Component {
 
   render() {
     const {exists} = this.state.infos;
+
+    console.log("ADD PRODUCT TO SHOPPING CART MODAL: ", this.state.infos);
 
     const {isFetching} = this.props;
     return (
